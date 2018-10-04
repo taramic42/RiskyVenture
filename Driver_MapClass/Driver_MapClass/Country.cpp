@@ -42,6 +42,8 @@ Country::Country(std::string line){
 	
 	line.replace(0, line.find(",") + 1, "");
 
+	//Given the structure of the data file, a single country cannot belong to more than one continent
+	//Any attempt to do so through the .map file would either be ignored or create 2 countries with the same name and connectivity
 	borderString = line;
 
     owner = 0;
@@ -62,6 +64,14 @@ std::string Country::getContinentName() const{
 	return continent;
 }
 
+std::string Country::getName() const {
+	return name;
+}
+
+std::string Country::getBorderString() const {
+	return borderString;
+}
+
 Country Country::travel(int index){
 	if(index>=0 && index<linkedCountries)
 		return *borderCountries[index];
@@ -74,7 +84,6 @@ Country Country::travel(std::string name){
 		if (name.compare(borderCountries[i]->name))
 			return *borderCountries[i];
 	}
-
 
 	return Country();
 }
@@ -100,5 +109,9 @@ void Country::displayBorderCountries(){
 }
 
 void Country::display(){
-    std::cout<<name<<" "<<continent<<" "<<armyCount<<" "<<owner<<" "<<borderString<<std::endl;
+    std::cout<<name<<" "<<continent<<" "<<armyCount<<" "<<owner<<" ";
+	for (int i = 0; i < borderCountries.size(); i++) {
+		std::cout << borderCountries[i]->name << "+";
+	}
+	std::cout << std::endl;
 }

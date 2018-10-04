@@ -11,6 +11,8 @@ public:
 	int getOwner() const;
 	int getNumberOfBorderingCountries() const;
 	std::string getContinentName() const;
+	std::string getName() const;
+	std::string getBorderString() const;
 
 	Country travel(int index);
 	Country travel(std::string name);
