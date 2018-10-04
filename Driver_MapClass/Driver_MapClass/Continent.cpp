@@ -1,8 +1,9 @@
+#pragma once
+
 #include "stdafx.h"
 #include "Continent.h"
 #include <sstream>
 #include <iostream>
-
 
 
 Continent::Continent() {
