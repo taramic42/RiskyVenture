@@ -40,6 +40,7 @@ Map::Map(std::vector<std::string> lineList) {
 }
 
 Map::Map(std::string file) {
+	
 	std::string line;
 	std::vector<std::string> lineList;
 	std::ifstream inputFile;
