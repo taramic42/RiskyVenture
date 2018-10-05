@@ -73,13 +73,25 @@ Map::Map(std::string file) {
 
 }
 
+Country Map::getCountry(int i){
+    if(i >= 0 && i < country.size())
+        return country[i];
+    
+    return Country();
+}
+
 void Map::addContinent(Continent cont){
     
     continent.push_back(cont);
 
 }
 
+int Map::size(){
+    
+    return country.size();
 
+}
+    
 void Map::addCountry(Country coun){
     
     country.push_back(coun);
