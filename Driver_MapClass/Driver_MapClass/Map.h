@@ -8,6 +8,8 @@ public:
 	Map();
 	Map(std::vector<std::string> lineList);
 	Map(std::string file);
+    Country getCountry(int i);
+    int size();
     void addContinent(Continent cont);
     void addCountry(Country coun);
     void connectObjects();
