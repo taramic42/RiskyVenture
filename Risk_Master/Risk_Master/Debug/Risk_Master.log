@@ -1,0 +1,11 @@
+﻿  GameBoard.cpp
+d:\fall 2018\comp 345\risk\board\gameboard.cpp(27): warning C4018: '<': signed/unsigned mismatch
+d:\fall 2018\comp 345\risk\board\gameboard.cpp(63): warning C4018: '<': signed/unsigned mismatch
+d:\fall 2018\comp 345\risk\board\gameboard.cpp(86): warning C4018: '<': signed/unsigned mismatch
+d:\fall 2018\comp 345\risk\board\gameboard.cpp(128): warning C4018: '<': signed/unsigned mismatch
+d:\fall 2018\comp 345\risk\board\gameboard.cpp(142): warning C4018: '<': signed/unsigned mismatch
+d:\fall 2018\comp 345\risk\board\gameboard.cpp(152): warning C4018: '<': signed/unsigned mismatch
+d:\fall 2018\comp 345\risk\board\gameboard.cpp(162): warning C4018: '<': signed/unsigned mismatch
+  Risk_Master.cpp
+  Generating Code...
+  Risk_Master.vcxproj -> D:\Fall 2018\COMP 345\Risk_Master\Debug\Risk_Master.exe
