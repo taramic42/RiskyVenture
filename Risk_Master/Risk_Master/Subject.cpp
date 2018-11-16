@@ -10,7 +10,7 @@ Subject::Subject()
 
 Subject::~Subject()
 {
-	observerList.clear();
+	//observerList.clear();
 }
 
 void Subject::addObserver(Observer * o)

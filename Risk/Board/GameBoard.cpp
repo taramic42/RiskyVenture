@@ -44,6 +44,7 @@ GameBoard::GameBoard()
 
 GameBoard::~GameBoard()
 {
+	delete statistics;
 }
 
 void GameBoard::randomizeOrder() {
@@ -79,15 +80,15 @@ void GameBoard::firstPlayer() {
 
 void GameBoard::display() {
 
-	gameMap.display();
+	/*gameMap.display();
 	std::cout << std::endl;
 	mapDeck.displayDeck();
 
 	for (int i = 0; i < playerList.size();i++) {
 		playerList[i].display();
 		std::cout << std::endl;
-	}
-
+	}*/
+	statistics->activateChart();
 }
 
 void GameBoard::setupBoard() {
@@ -143,8 +144,8 @@ void GameBoard::setupBoard() {
 		temp.push_back(&playerList[i]);
 	}
 
-	statistics = ChartView(temp, gameMap.size());
-	statistics.activateChart();
+	statistics = new ChartView(temp, gameMap.size());
+	statistics->activateChart();
 }
 
 Player * GameBoard::getPlayer(int id)
@@ -177,6 +178,8 @@ void GameBoard::giveAllCountriesToPlayer(int id)
 
 	for (int i = 0; i < gameMap.size(); i++) {
 		countryList.push_back(gameMap.getCountry(i));
+		if (gameMap.getCountry(i)->getOwner() != id)
+			playerList[gameMap.getCountry(i)->getOwner()].removeCountry(gameMap.getCountry(i)->getName());
 	}
 
 	playerList[id].setCountries(countryList);

@@ -31,6 +31,6 @@ private:
 	std::vector<Player> playerList;
 	Map gameMap;
 	Deck mapDeck;
-	ChartView statistics;
+	ChartView* statistics;
 };
 

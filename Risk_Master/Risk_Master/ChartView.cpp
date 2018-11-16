@@ -1,5 +1,19 @@
 #include "ChartView.h"
 
+void ChartView::removeDefeatedPlayers()
+{
+	for (int i = playerList.size() - 1; i >= 0; i--) {
+		//remove defeated players
+		if (playerList[i]->getNumberOfOwnedCountries() == 0) {
+			int hold = playerList[i]->getId();
+			defeatedPlayerOrder += " (Player "+std::to_string(hold)+") ";
+			playerList[i]->removeObserver(this);
+			playerList.erase(playerList.begin() + i);
+			percentageOwnedByPlayer.erase(percentageOwnedByPlayer.begin() + i);
+		}
+	}
+}
+
 ChartView::ChartView()
 {
 	active = false;
@@ -20,7 +34,7 @@ ChartView::ChartView(vector<Player*> list, int numOfCountries)
 	}
 
 	active = false;
-	defeatedPlayerOrder = "Defeated Players: \n";
+	defeatedPlayerOrder = "Defeated Players: ";
 
 }
 
@@ -39,12 +53,17 @@ void ChartView::activateChart()
 
 void ChartView::display()
 {
+
+	cout << "-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-" << endl;
+
 	for (int i = 0; i < playerList.size(); i++) {
 		cout << "Player " << playerList[i]->getId() << " owns " << playerList[i]->getNumberOfOwnedCountries() << " out of " << mapSize << " or ";
 		cout << (int)(percentageOwnedByPlayer[i] * 100) << "% of the world." << endl << endl;
 	}
 	if (defeatedPlayerOrder.size() > 20)
 		cout << defeatedPlayerOrder << endl;
+
+	cout << "-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-" << endl;
 }
 
 void ChartView::congrats()
@@ -56,26 +75,22 @@ void ChartView::congrats()
 
 void ChartView::update()
 {
+	//remove defeated players
+	removeDefeatedPlayers();
 
 	if(active)
 		for (int i = playerList.size()-1; i >= 0; i--) {
-			//remove defeated players
-			if (playerList[i]->getNumberOfOwnedCountries() == 0) {
-				defeatedPlayerOrder += "Player " + (playerList[i]->getId());
-				defeatedPlayerOrder += "\n";
-				playerList[i]->removeObserver(this);
-				playerList.erase(playerList.begin() + i);
-				percentageOwnedByPlayer.erase(percentageOwnedByPlayer.begin() + i);
-			}
+
+			//calculate percentages otherwise
+			percentageOwnedByPlayer[i] = playerList[i]->getNumberOfOwnedCountries() / mapSize;
+
 			//check if someone has won
-			else if (playerList[i]->getNumberOfOwnedCountries() == mapSize) {
+			if (playerList[i]->getNumberOfOwnedCountries() == mapSize) {
+				display();
 				congrats();
 				active = false;
 			}
-			//calculate percentages otherwise
-			else {
-				percentageOwnedByPlayer[i] = playerList[i]->getNumberOfOwnedCountries() / mapSize;
-			}
+			
 	}
 
 	if(active)

@@ -19,6 +19,8 @@ private:
 	vector<float> percentageOwnedByPlayer;
 
 	string defeatedPlayerOrder;
+
+	void removeDefeatedPlayers();
 public:
 	ChartView();
 	ChartView(vector<Player*> list, int numOfCountries);
