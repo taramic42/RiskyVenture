@@ -1,0 +1,13 @@
+﻿  GameBoard.cpp
+c:\users\grego\desktop\xavsoriginal\riskyventure-xav_branch\risk\board\gameboard.cpp(133): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  GameLoop.cpp
+  AttackPhase.cpp
+  ReinforcePhase.cpp
+c:\users\grego\desktop\xavsoriginal\riskyventure-xav_branch\risk\phases\reinforcephase.cpp(19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Player.cpp
+c:\users\grego\desktop\xavsoriginal\riskyventure-xav_branch\risk\player\player.cpp(23): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+c:\users\grego\desktop\xavsoriginal\riskyventure-xav_branch\risk\player\player.cpp(48): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Aggressive.cpp
+  main.cpp
+  Generating Code...
+  Risk_Master.vcxproj -> C:\Users\grego\Desktop\XavsOriginal\RiskyVenture-xav_branch\Risk_Master\x64\Debug\Risk_Master.exe
