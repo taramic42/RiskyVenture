@@ -4,6 +4,8 @@
 #include "../Dice/DiceClass.hpp"
 #include "../Card/Hand.hpp"
 #include "../MapClass/Country.h"
+#include "../../Risk_Master/Risk_Master/Strategy.h"
+
 
 using namespace std;
 
@@ -18,7 +20,7 @@ private:
 	int armiesToPlaceOnBoard;
 
 	//need to add class here not sure why
-	class Strategy *playerStrategy;
+	Strategy *playerStrategy;
 
 	Country* origin;
 

@@ -1,16 +1,4 @@
-﻿  GameBoard.cpp
-d:\comp345\risk\board\gameboard.cpp(31): warning C4018: '<': signed/unsigned mismatch
-d:\comp345\risk\board\gameboard.cpp(75): warning C4018: '<': signed/unsigned mismatch
-d:\comp345\risk\board\gameboard.cpp(140): warning C4018: '<': signed/unsigned mismatch
-d:\comp345\risk\board\gameboard.cpp(155): warning C4018: '<': signed/unsigned mismatch
-  Player.cpp
-d:\comp345\risk\player\player.cpp(45): warning C4018: '<': signed/unsigned mismatch
-d:\comp345\risk\player\player.cpp(55): warning C4018: '<': signed/unsigned mismatch
-d:\comp345\risk\player\player.cpp(73): warning C4018: '<': signed/unsigned mismatch
-d:\comp345\risk\player\player.cpp(103): warning C4018: '<': signed/unsigned mismatch
-  Aggressive.cpp
-d:\comp345\risk_master\risk_master\aggressive.cpp(40): warning C4018: '<': signed/unsigned mismatch
-d:\comp345\risk_master\risk_master\aggressive.cpp(41): warning C4018: '>': signed/unsigned mismatch
-  Strategy.cpp
-  Generating Code...
+﻿  Aggressive.cpp
+d:\comp345\risk_master\risk_master\aggressive.cpp(28): warning C4018: '<': signed/unsigned mismatch
+d:\comp345\risk_master\risk_master\aggressive.cpp(29): warning C4018: '>=': signed/unsigned mismatch
   Risk_Master.vcxproj -> D:\COMP345\Risk_Master\Debug\Risk_Master.exe

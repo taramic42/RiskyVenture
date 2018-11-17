@@ -3,7 +3,6 @@
 #include <iostream>
 #include <vector>
 #include "Player.h"
-#include "../../Risk_Master/Risk_Master/Strategy.h"
 
 Player::Player() {}
 Player::~Player() {}
@@ -88,7 +87,7 @@ void Player::reinforce(Deck* deck)
 
 void Player::attack()
 {
-	cout << "attack" << endl;
+	playerStrategy->attack();
 }
 
 void Player::fortify()

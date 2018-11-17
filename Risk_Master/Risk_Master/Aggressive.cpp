@@ -17,30 +17,19 @@ void Aggressive::reinforce(Deck* Deck, Player* Player) {
 	deck = Deck;
 	player = Player;
 
-	vector<Country*> borderCountries;
-
 	std::cout << "Player " << player->getId() << " is currently playing as the aggressive strategy." << endl;
 	std::cout << "Reinforce phase begins. Finding adjacent country to fortify." << endl;
 
 
 	int choice = 0;
+	
+	//loops through countries owned, finds strongest and sets choice to index of strongest country from "getCountriesOwned"
 
-	//build list of countrys that have potential targets to reinforce them
-	vector<Country*> reinforceList;
-
-	//check to see if the player has a bordering country that does not belong to him to reinforce
-	for (int i = 0; i < player->getNumberOfOwnedCountries(); i++) {
-		for (int j = 0; player->getCountriesOwned()[i]->getBorderCountries().size(); j++) {
-			if (player->getId() != player->getCountriesOwned()[i]->getBorderCountries()[j]->getOwner()) {
-				reinforceList.push_back(player->getCountriesOwned()[i]);
-			}
-		}
-	}
-
-	for (int i = 0; i < reinforceList.size(); i++) {
-		if (i + 1 > reinforceList.size())
+	for (int i = 0; i < player->getCountriesOwned().size(); i++) {
+		if (i + 1 == player->getCountriesOwned().size())
 			break;
-		if (reinforceList[i]->getArmyCount() > reinforceList[i + 1]->getArmyCount()) {
+
+		if (player->getCountriesOwned()[i]->getArmyCount() > player->getCountriesOwned()[i + 1]->getArmyCount()) {
 			choice = i;
 		}
 		else {
