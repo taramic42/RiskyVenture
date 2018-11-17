@@ -1,4 +1,4 @@
 ﻿  Aggressive.cpp
-d:\comp345\risk_master\risk_master\aggressive.cpp(28): warning C4018: '<': signed/unsigned mismatch
-d:\comp345\risk_master\risk_master\aggressive.cpp(29): warning C4018: '>=': signed/unsigned mismatch
+d:\comp345\risk_master\risk_master\aggressive.cpp(29): warning C4018: '<': signed/unsigned mismatch
+d:\comp345\risk_master\risk_master\aggressive.cpp(66): warning C4018: '<': signed/unsigned mismatch
   Risk_Master.vcxproj -> D:\COMP345\Risk_Master\Debug\Risk_Master.exe

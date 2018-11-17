@@ -1,16 +1,13 @@
-/*
-#include <iostream>
-#include <sstream>
-#include <fstream>
-#include <vector>
 #include "Fortify.h"
+
 using namespace std;
 
 Fortify::Fortify() {}
 Fortify::~Fortify() {}
 
-Fortify::Fortify(Player &player) : player(&player) {}
+Fortify::Fortify(Player *player) : player(player) {}
 
+/*
 void Fortify::displayOwnedCountries() {
 
 	//displays all the countries owned with the i+1 for a menu choice
@@ -111,6 +108,8 @@ void Fortify::fortifyCountry()
 
 	
 }
+
+
 void Fortify::prompt()
 {
 
@@ -131,7 +130,7 @@ void Fortify::prompt()
 			setOrigin();
 
 		}
-		if (player->getArmiesLeftToPlaceOnBoard() <= 1)
+		if (totalArmiesOnCountries <= 1)
 		{
 			cout << "Not enough armies to fortify!\n";
 
@@ -139,14 +138,27 @@ void Fortify::prompt()
 		else
 		{
 			fortifyCountry();
-
-			cout << "You now have a total of " << player->getTotalArmies() << " left.\n\n";
 		}
 	
 
 }
 
-
-
-
 */
+
+void Fortify::setTotalArmiesOnCountries()
+{
+	totalArmiesOnCountries = 0;
+
+	for (auto i : player->getCountriesOwned()) {
+		totalArmiesOnCountries += i->getArmyCount();
+	}
+}
+
+void Fortify::fortifyCountry(Country* origin, Country * target)
+{
+	int armiesToMove = origin->getArmyCount() - 1;
+	origin->addArmies(-armiesToMove);
+
+	target->addArmies(armiesToMove);
+}
+

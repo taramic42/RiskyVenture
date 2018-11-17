@@ -92,7 +92,7 @@ void Player::attack()
 
 void Player::fortify()
 {
-	cout << "fortify" << endl;
+	playerStrategy->fortify();
 }
 
 void Player::display() {
