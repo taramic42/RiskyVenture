@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "Player.h"
+#include "../Phases/Fortify.h"
 
 Player::Player() {}
 Player::~Player() {}
@@ -92,7 +93,10 @@ void Player::attack()
 
 void Player::fortify()
 {
-	playerStrategy->fortify();
+	Fortify phase(this);
+
+	phase.prompt();
+	//playerStrategy->fortify();
 }
 
 void Player::display() {
@@ -114,14 +118,4 @@ void Player::setStrategy(Strategy* newStrategy) {
 Hand* Player::getHand()
 {
 	return &m_hand;
-}
-
-void Player::setOrigin(Country * country)
-{
-	origin = country;
-}
-
-Country * Player::getOrigin()
-{
-	return origin;
 }

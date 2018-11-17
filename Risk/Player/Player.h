@@ -22,8 +22,6 @@ private:
 	//need to add class here not sure why
 	Strategy *playerStrategy;
 
-	Country* origin;
-
 public:
 	Player();
 	~Player();
@@ -55,8 +53,5 @@ public:
 	void setStrategy(Strategy* newStrat);
 
 	Hand* getHand();
-
-	void setOrigin(Country* country);
-	Country* getOrigin();
 };
 

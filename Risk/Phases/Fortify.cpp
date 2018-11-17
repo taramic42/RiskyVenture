@@ -7,143 +7,90 @@ Fortify::~Fortify() {}
 
 Fortify::Fortify(Player *player) : player(player) {}
 
-/*
-void Fortify::displayOwnedCountries() {
 
-	//displays all the countries owned with the i+1 for a menu choice
-	for (int i = 0; i < player->getNumberOfOwnedCountries(); i++) {
-		cout << i + 1 << "." << player->getCountriesOwned()[i]->getName() << endl;
-	}
-}
-
-void Fortify::setOrigin()
+void Fortify::fortifyCountry(int armies)
 {
-	vector <Country*> pc1 = player->getCountriesOwned();
-	string countryName;
-	cout << "enter which country you would like to originate from\n";
-	cin >> countryName;
-	bool c = false;
-	for (int i = 0; i < pc1.size(); i++)
-	{
-		if (pc1[i]->getName() == countryName)
-		{
-			player->setOrigin(pc1[i]);
-			cout << "Origin set to: " << countryName << endl << endl;
-			c = true;
-		}
-	}
-	if (!c)
-	{
-		cout << "You do not have this country try again!\n";
-		cin >> countryName;
-		for (int i = 0; i < pc1.size(); i++)
-		{
-			if (pc1[i]->getName() == countryName)
-			{
-				player->setOrigin(pc1[i]);
-				cout << "Origin set to: " << countryName << endl << endl;
-				c = true;
-			}
-		}
-	}
-}
+	int armiesToMove = armies;
+	m_origin->addArmies(armiesToMove);
 
-void Fortify::fortifyCountry()
-{
-	Country* origin = player->getOrigin();
-	
-	cout << "Adjacent countries to " << origin->getName() << endl << endl;
-	vector <Country*>pc1 = player->getCountriesOwned();
-	for (int j = 0; j < pc1.size(); j++)
-	{
-		for (int i = 0; i < origin->getNumberOfBorderingCountries(); i++)
-		{
-			if (pc1[j]->getName() == origin->travel(i)->getName())
-				cout << origin->travel(i)->getName() << endl;
-			else continue;
-		}
-	}
-
-	cout << "\nEnter which country you would like to fortify\n";
-	string fcountry;
-	cin >> fcountry;
-
-	int army;
-	cout << "\nEnter how many armies you would like to send:\n";
-	cin >> army;
-	while (army > player->getArmiesLeftToPlaceOnBoard() - 1) {
-		cout << "Not enough armied. Try again\n";
-		cin >> army;
-	}
-
-	bool c = false;
-	for (int i = 0; i < origin->getNumberOfBorderingCountries(); i++)
-	{
-		if (origin->travel(i)->getName() == fcountry)
-		{
-			player->fortify(origin->travel(i), army);
-			player->setTarget(origin->travel(i));
-			cout << army << " armies has been sent to " << fcountry << endl;
-			c = true;
-		}
-
-	}
-
-	if (!c)
-	{
-		cout << "this country is not adjacent try again!\n";
-		cin >> fcountry;
-		for (int i = 0; i < origin->getNumberOfBorderingCountries(); i++)
-		{
-			if (origin->travel(i)->getName() == fcountry)
-			{
-				player->fortify(origin->travel(i), army);
-				player->setTarget(origin->travel(i));
-				cout << army << " armies has been sent to " << fcountry << endl;
-				c = true;
-
-			}
-		}
-	}
-
-	
+	m_target->addArmies(-armiesToMove);
 }
 
 
 void Fortify::prompt()
 {
+	cout << "Beginning of fortification phase." << endl;
 
-		cout << "Your countries:\n";
-		if (player->getNumberOfOwnedCountries() == 0)
-			cout << "No countries\n";
+	bool loopFlag = true;
+
+	while (loopFlag) {
+
+		int choice = 0;
+		m_origin = NULL;
+		m_target = NULL;
+\
+		cout << "Which country would you like to fortify?" << endl;
+
+		//display list of elegible countries that have neighboring countries with armies greater than 1
+		vector<Country*> eligibleCountries = getElegibleCountries();
+
+		for (int i = 0; i < eligibleCountries.size(); i++) {
+			cout << i + 1 << " " << eligibleCountries[i]->getName()<<" Total armies " << eligibleCountries[i]->getArmyCount() << endl;
+		}
+
+		cin >> choice;
+		choice--;
+
+		if (choice >= 0 && choice < eligibleCountries.size()) {
+			m_origin = eligibleCountries[choice];
+		}
+
+		cout << "Your origin country chosen to fortify is " << m_origin->getName() << endl;
+
+		cout << "Choose from the list of elegible countries to take armies from." << endl;
+
+		vector<Country*> eligibleBorderCountry = getElegibleTargetCountries();
+
+		for (int i = 0; i < eligibleBorderCountry.size(); i++) {
+			cout << i + 1 << " " << eligibleBorderCountry[i]->getName() << " Total armies: " << eligibleBorderCountry[i]->getArmyCount() << endl;
+		}
+
+		cin >> choice;
+		choice--;
+
+
+		if (choice >= 0 && choice < eligibleBorderCountry.size()) {
+			m_target = eligibleBorderCountry[choice];
+		}
+
+		cout << "Your target country chosen to move armies from is " << m_target->getName() << endl;
+
+		cout << "How many armies would you like to displace?" << endl;
+
+		cin >> choice;
+
+		if (choice < m_target->getArmyCount()) {
+			cout << "Valid input. Armies moved." << endl;
+			fortifyCountry(choice);
+			cout << "Origin country's new amount of armies. " << m_origin->getArmyCount() << endl;
+			cout << "Target country's new amount of armies. " << m_target->getArmyCount() << endl;
+		}
+		else {
+			cout << "Invalid input." << endl;
+		}
+
+		cout << "Would you like to fortify another country?" << endl;
+		cout << "To continue input 'y', to end fortification phase enter anything" << endl;
+		char answer;
+		cin >> answer;
+
+		if (answer == 'y')
+			loopFlag = true;
 		else
-		{
-			displayOwnedCountries();
-		}
-	
-		setOrigin();
-	
-		Country* origin = player->getOrigin();
-		if (origin == NULL)
-		{
-			cout << "no origin set\n";
-			setOrigin();
-
-		}
-		if (totalArmiesOnCountries <= 1)
-		{
-			cout << "Not enough armies to fortify!\n";
-
-		}
-		else
-		{
-			fortifyCountry();
-		}
-	
-
+			loopFlag = false;
+	}
 }
 
-*/
 
 void Fortify::setTotalArmiesOnCountries()
 {
@@ -161,4 +108,50 @@ void Fortify::fortifyCountry(Country* origin, Country * target)
 
 	target->addArmies(armiesToMove);
 }
+
+vector<Country*> Fortify::getElegibleCountries()
+{
+	vector<Country*> eligibleCountries;
+
+	for (int i = 0; i < player->getCountriesOwned().size(); i++) {
+		
+		for (int j = 0; j < player->getCountriesOwned()[i]->getBorderCountries().size(); j++) {
+
+			if (player->getId() == player->getCountriesOwned()[i]->getBorderCountries()[j]->getOwner()) {
+
+				if (player->getCountriesOwned()[i]->getBorderCountries()[j]->getArmyCount() > 1) {
+
+					eligibleCountries.push_back(player->getCountriesOwned()[i]);
+					
+				}
+			}
+		}	
+	}
+
+	//removes duplicates
+	auto end = eligibleCountries.end();
+	for (auto it = eligibleCountries.begin(); it != end; ++it) {
+		end = std::remove(it + 1, end, *it);
+	}
+
+	eligibleCountries.erase(end, eligibleCountries.end());
+
+	return eligibleCountries;
+}
+
+vector<Country*> Fortify::getElegibleTargetCountries()
+{
+	vector<Country*> eligibleTargetCountries;
+
+	for (int i = 0; i < m_origin->getBorderCountries().size(); i++) {
+		if (player->getId() == m_origin->getBorderCountries()[i]->getOwner() && m_origin->getBorderCountries()[i]->getArmyCount() > 1) {
+			eligibleTargetCountries.push_back(m_origin->getBorderCountries()[i]);
+		}
+	}
+
+	return eligibleTargetCountries;
+
+}
+
+
 
