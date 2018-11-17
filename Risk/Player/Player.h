@@ -1,11 +1,9 @@
 #pragma once
-//#include "stdafx.h"
 #include <string>
 #include <vector>
 #include "../Dice/DiceClass.hpp"
 #include "../Card/Hand.hpp"
 #include "../MapClass/Country.h"
-#include "../../Risk_Master/Risk_Master/Strategy.h"
 
 using namespace std;
 

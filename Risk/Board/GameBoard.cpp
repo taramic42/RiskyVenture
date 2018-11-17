@@ -26,12 +26,16 @@ GameBoard::GameBoard()
 
 	} while (std::cin.fail()||players < 2 || players>6);
 
+	//TODO add ASK HOW MANY AIS
+
 	for (int i = 0; playerList.size() < players; i++) {
 		playerList.push_back(new Player(i));
 		playerOrder.push_back(i);
 	}
 
 	//added for aggressive testing
+
+	//Aggressive *testStrat = new Aggressive();
 
 	playerList[0]->setStrategy(new Aggressive());
 

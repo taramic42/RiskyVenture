@@ -1,7 +1,8 @@
 #include "Aggressive.h"
+#include "../../Risk/Phases/ReinforcePhase.h"
 
 
-Aggressive::Aggressive() : Strategy(){}
+Aggressive::Aggressive(){}
 
 
 Aggressive::~Aggressive()
@@ -11,7 +12,7 @@ Aggressive::~Aggressive()
 
 
 
-void Aggressive::s_reinforce(Deck* Deck, Player* Player) {
+void Aggressive::reinforce(Deck* Deck, Player* Player) {
 	
 	deck = Deck;
 	player = Player;
@@ -85,7 +86,7 @@ void Aggressive::attack() {
 	}
 
 	//need TODO this
-	//AttackPhase phase();
+	//AttackPhase phase = AttackPhase(attackFrom, attackTarget);
 
 }
 

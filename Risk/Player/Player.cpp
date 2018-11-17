@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "Player.h"
+#include "../../Risk_Master/Risk_Master/Strategy.h"
 
 Player::Player() {}
 Player::~Player() {}
@@ -82,7 +83,7 @@ void Player::diceImp(int num)
 
 void Player::reinforce(Deck* deck)
 {
-	this->playerStrategy->s_reinforce(deck, this);
+	playerStrategy->reinforce(deck, this);
 }
 
 void Player::attack()
