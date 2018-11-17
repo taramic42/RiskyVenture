@@ -49,7 +49,8 @@ void GameLoop::prompt() {
 	//bizarre syntax if pointer of vectors is passed the pointer dereference needs to happen before the [] operator
 	players[currentPlayer]->reinforce(deck);
 	system("pause");
-	players[currentPlayer]->attack();
+	players[currentPlayer]->attack(players);
+	system("pause");
 	players[currentPlayer]->fortify();
 }
 

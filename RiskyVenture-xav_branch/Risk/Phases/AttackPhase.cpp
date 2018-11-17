@@ -1,6 +1,7 @@
 #include "AttackPhase.h"
 
-AttackPhase::AttackPhase() {}
+AttackPhase::AttackPhase() {
+}
 
 AttackPhase::~AttackPhase() {}
 
@@ -11,12 +12,65 @@ AttackPhase::AttackPhase(Player &player, vector<Player*> players) : thePlayer(&p
 
 }
 
+AttackPhase::AttackPhase(Player &player, vector<Player*> players, Country* source, Country* targ){
+	thePlayer= &player;
+	for (int i = 0; i < players.size(); i++)
+		playerList.push_back(players[i]);
+	begAIAssult(source, targ);
+}
+
 void AttackPhase::setPlayer(Player & player)
 {
 	thePlayer = &player;
 }
 
 using namespace std;
+
+//For AI(Aggressive)//////////////////////////////////////////////////////////////////////////
+void AttackPhase::begAIAssult(Country* srcCount, Country* targCount) {
+	successfullyConquered = false;
+	while (!successfullyConquered) {
+	//finds the Maximum assult troops to send and Maximum troops to defend
+	int maxInvade;
+	int maxDefend;
+	if (srcCount->getArmyCount()<2) {
+		cout << "No more armies to attack from " << srcCount->getName() << endl;
+		successfullyConquered = true;
+		return;
+	}
+	
+	if (srcCount->getArmyCount()>3) {
+		maxInvade = 3;
+	}
+	else {
+		maxInvade = srcCount->getArmyCount() - 1;
+	}
+	if (targCount->getArmyCount() >= 2) {
+		maxDefend = 2;
+	}
+	else {
+		maxDefend = targCount->getArmyCount();
+	}
+
+	//Roll attacker dice
+	cout << "\n>>>>>>>>>>>>>>>>>>Your troopaloops from " << srcCount->getName() << " are now attacking " << targCount->getName() << "..." << endl;
+	cout <<"       "<< srcCount->getName() << "-" << " has " << srcCount->getArmyCount() <<" army/armies" <<endl;
+	cout <<"       "<< targCount->getName() << "-" << " has " << targCount->getArmyCount() << " army/armies" << endl;
+	cout << "Result of rolls for the Attacking Country " << srcCount->getName() <<":" << endl;
+	thePlayer->getDice()->diceRolling(maxInvade);
+	//Roll defender dice
+	cout << "Result of rolls for the Defending Country " << targCount->getName() <<":" << endl;
+	playerList[targCount->getOwner()]->getDice()->diceRolling(maxDefend);
+	cout << "------------------------------------------------------------------------------------------------------------------\n" << endl;
+
+	
+	int result;
+	//Determine result
+	result = thePlayer->getDice()->resultOfBattle(maxInvade, maxDefend, *(playerList[targCount->getOwner()]->getDice()));
+	analy(result, srcCount, targCount);
+	}//end while
+	return;
+}
 
 void AttackPhase::prompt() {
 
@@ -272,10 +326,73 @@ void AttackPhase::conquerCountry(Country * target)
 }
 
 
-//added for the Aggressive Strategy Class
+void AttackPhase::analy(int res, Country* srcCount, Country* targCount) {
+	switch (res) {
+	case -2:
+		cout << "   ******************************************************" << endl;
+		cout << "   *   RESULT OF BATTLE: Lost ~~~ You lost 2 armies ~~~ *" << endl;
+		cout << "   ******************************************************" << endl;
+		srcCount->addArmies(-2);
+		break;
+	case -1:
+		cout << "   ******************************************************" << endl;
+		cout << "   *   RESULT OF BATTLE: Lost ~~~ You lost 1 army ~~~   *" << endl;
+		cout << "   ******************************************************" << endl;
+		srcCount->addArmies(-1);
+		break;
+	case 0:
+		cout << "   ******************************************************************************" << endl;
+		cout << "   *   RESULT OF BATTLE: Tie ~~~ You lost 1 army/ defender has lost 1 army ~~~  *" << endl;
+		cout << "   ******************************************************************************" << endl;
+		targCount->addArmies(-1);
+		srcCount->addArmies(-1);
+		break;
+	case 1:
+		cout << "   ************************************************************" << endl;
+		cout << "   *   RESULT OF BATTLE: Won ~~~ Defender has lost 1 army ~~~ *" << endl;
+		cout << "   ************************************************************" << endl;
+		targCount->addArmies(-1);
+		break;
+	case 2:
+		cout << "   **************************************************************" << endl;
+		cout << "   *   RESULT OF BATTLE: Won ~~~ Defender has lost 2 armies ~~~ * " << endl;
+		cout << "   **************************************************************" << endl;
+		targCount->addArmies(-2);
+		break;
+	}
 
-void AttackPhase::attackFromCountry(int choice, int target){
+	if (targCount->getArmyCount() == 0) {
+		conquerCountry(srcCount, targCount);
+		successfullyConquered = true;
+	}
+
+	//if (srcCount->getArmyCount() < 2) {
+	//	//If the attacking country has less than 2 armies
+	//	//must exit inner loop from attackPhasePromt and "restart" dialog...
+	//	//cout << "There are no longer enough armies in " << eligibleCountries[attCon]->getName() << " to attack" << endl;
+	//	//flag = false;
+	//}
+
+}
+
+//overloaded to work with AI(Aggressive)
+void AttackPhase::conquerCountry(Country* source, Country* target)
+{
+	cout << 
+"\n____________________________________________________________________________________________\n\n"
+"++++++++++++++++++++++++++++++ YOU HAVE CONQUERED: "<< target->getName() << "  +++++++++++++++++++++++++++++++++"<<
+"\n___________________________________________________________________________________________\n" << endl;
+	cout << "--> You have conquered " << target->getName() << " from Player " << target->getOwner() + 1 << endl;
+	int defenderId = target->getOwner();
+	playerList[defenderId]->removeCountry(target->getName());
+	thePlayer->addCountry(target);
 
 
-
+		
+		cout << "--> You now have a total of " << source->getArmyCount() << " armies in " << source->getName() << endl;
+		cout << "--> Sending 1 army to occupy " << target->getName()<< endl;
+		
+			source->addArmies(-1);
+			target->addArmies(1);
+			return;
 }

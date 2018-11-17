@@ -3,7 +3,6 @@
 #include <iostream>
 #include <vector>
 #include "Player.h"
-//#include "../../Risk_Master/Risk_Master/Strategy.h"
 
 Player::Player() {}
 Player::~Player() {}
@@ -83,17 +82,12 @@ void Player::diceImp(int num)
 
 void Player::reinforce(Deck* deck)
 {
-	//throws a null pointer
-	//playerStrategy->reinforce(deck, this);
-	//try this it works no problem 
-	playerStrategy->reinforce();
-	//playerStrategy->reinforce(deck, this);
-	
+	playerStrategy->reinforce(deck, this);
 }
 
-void Player::attack()
+void Player::attack(vector<Player*> players)
 {
-	cout << "attack" << endl;
+	playerStrategy->attack(this, players);
 }
 
 void Player::fortify()

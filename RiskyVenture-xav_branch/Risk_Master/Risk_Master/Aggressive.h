@@ -9,16 +9,18 @@ public:
 	Aggressive();
 	~Aggressive();
 
-	void reinforce();
+
 	void reinforce(Deck* deck, Player* player);
-	void attack();
+	void attack(Player*, vector<Player*>);
 	void fortify();
 
 	void setStrongest(int choice);
+	int findStrongestCountry();
 
 private:
 	int strongestCountry;
 	Deck* deck;
 	Player* player;
+	Player* playerList;
 };
 
