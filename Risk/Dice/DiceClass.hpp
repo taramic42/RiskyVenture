@@ -28,7 +28,7 @@ public:
     void threeDice(int a,int b,int c);//saving and sorting 3 dice
     bool valueCheck(int n);//check if dice value is correct
 
-	int resultOfBattle(int numberOfAttackers,int numberOfDefenders,DiceRollingFacility &defenderDice);
+	int resultOfBattle(int numberOfAttackers,int numberOfDefenders, DiceRollingFacility &defenderDice);
 
 	int* getDiceResult(int numOfDice);
 

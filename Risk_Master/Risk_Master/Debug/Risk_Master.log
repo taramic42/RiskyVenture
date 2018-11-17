@@ -1,7 +1,35 @@
-﻿  ChartView.cpp
-e:\fall 2018\comp 345\risk_master\risk_master\chartview.cpp(25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-e:\fall 2018\comp 345\risk_master\risk_master\chartview.cpp(27): warning C4018: '<': signed/unsigned mismatch
-e:\fall 2018\comp 345\risk_master\risk_master\chartview.cpp(32): warning C4018: '<': signed/unsigned mismatch
-e:\fall 2018\comp 345\risk_master\risk_master\chartview.cpp(44): warning C4018: '<': signed/unsigned mismatch
-e:\fall 2018\comp 345\risk_master\risk_master\chartview.cpp(59): warning C4018: '<': signed/unsigned mismatch
-  Risk_Master.vcxproj -> E:\Fall 2018\COMP 345\Risk_Master\Debug\Risk_Master.exe
+﻿  GameBoard.cpp
+d:\comp345\risk_master\risk_master\strategy.h(12): error C2061: syntax error: identifier 'Player'
+d:\comp345\risk\board\gameboard.cpp(29): warning C4018: '<': signed/unsigned mismatch
+d:\comp345\risk\board\gameboard.cpp(36): error C2259: 'Aggressive': cannot instantiate abstract class
+  d:\comp345\risk\board\gameboard.cpp(36): note: due to following members:
+  d:\comp345\risk\board\gameboard.cpp(36): note: 'void Strategy::s_reinforce(Deck *)': is abstract
+  d:\comp345\risk_master\risk_master\strategy.h(12): note: see declaration of 'Strategy::s_reinforce'
+d:\comp345\risk\board\gameboard.cpp(71): warning C4018: '<': signed/unsigned mismatch
+d:\comp345\risk\board\gameboard.cpp(136): warning C4018: '<': signed/unsigned mismatch
+d:\comp345\risk\board\gameboard.cpp(151): warning C4018: '<': signed/unsigned mismatch
+  GameLoop.cpp
+d:\comp345\risk_master\risk_master\strategy.h(12): error C2061: syntax error: identifier 'Player'
+d:\comp345\risk\gameutility\gameloop.cpp(17): warning C4018: '<': signed/unsigned mismatch
+  AttackPhase.cpp
+d:\comp345\risk_master\risk_master\strategy.h(12): error C2061: syntax error: identifier 'Player'
+d:\comp345\risk\phases\attackphase.cpp(9): warning C4018: '<': signed/unsigned mismatch
+d:\comp345\risk\phases\attackphase.cpp(58): warning C4018: '<': signed/unsigned mismatch
+d:\comp345\risk\phases\attackphase.cpp(78): warning C4018: '>': signed/unsigned mismatch
+d:\comp345\risk\phases\attackphase.cpp(81): warning C4018: '>': signed/unsigned mismatch
+d:\comp345\risk\phases\attackphase.cpp(101): warning C4018: '<': signed/unsigned mismatch
+d:\comp345\risk\phases\attackphase.cpp(114): warning C4018: '>=': signed/unsigned mismatch
+  ReinforcePhase.cpp
+d:\comp345\risk_master\risk_master\strategy.h(12): error C2061: syntax error: identifier 'Player'
+d:\comp345\risk\phases\reinforcephase.cpp(19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Player.cpp
+d:\comp345\risk_master\risk_master\strategy.h(12): error C2061: syntax error: identifier 'Player'
+d:\comp345\risk\player\player.cpp(44): warning C4018: '<': signed/unsigned mismatch
+d:\comp345\risk\player\player.cpp(54): warning C4018: '<': signed/unsigned mismatch
+d:\comp345\risk\player\player.cpp(72): warning C4018: '<': signed/unsigned mismatch
+d:\comp345\risk\player\player.cpp(85): error C2660: 'Strategy::s_reinforce': function does not take 2 arguments
+  d:\comp345\risk_master\risk_master\strategy.h(12): note: see declaration of 'Strategy::s_reinforce'
+d:\comp345\risk\player\player.cpp(102): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+d:\comp345\risk_master\risk_master\strategy.h(12): error C2061: syntax error: identifier 'Player'
+  Generating Code...

@@ -5,18 +5,25 @@
 #include "../Dice/DiceClass.hpp"
 #include "../Card/Hand.hpp"
 #include "../MapClass/Country.h"
-#include "../../Risk_Master/Risk_Master/Subject.h"
+#include "../../Risk_Master/Risk_Master/Strategy.h"
 
 using namespace std;
 
-class Player:public Subject{
+class Player{
 
 private:
 	vector <Country*> countries;
-	vector <Card> hand;
+	Hand m_hand;
 	DiceRollingFacility dice;
 	int id;
+
 	int armiesToPlaceOnBoard;
+
+	//need to add class here not sure why
+	class Strategy *playerStrategy;
+
+	Country* origin;
+
 public:
 	Player();
 	~Player();
@@ -39,11 +46,17 @@ public:
 
 	void setCountries(vector<Country*> list);
 
-	void reinforce();
+	void reinforce(Deck* deck);
 	void attack();
-
 	void fortify();
 
 	void display();
+
+	void setStrategy(Strategy* newStrat);
+
+	Hand* getHand();
+
+	void setOrigin(Country* country);
+	Country* getOrigin();
 };
 

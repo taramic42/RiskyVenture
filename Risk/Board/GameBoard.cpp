@@ -1,11 +1,13 @@
 #include "GameBoard.h"
 #include "../GameUtility/MapDirectory.h"
+#include "../../Risk_Master/Risk_Master/Strategy.h"
+#include "../../Risk_Master/Risk_Master/Aggressive.h"
 
 GameBoard::GameBoard()
 {
 	//Create the game map
 	//Invalid maps are not listed
-	MapDirectory mapList = MapDirectory("../../Risk/Maps");
+	MapDirectory mapList = MapDirectory("D:\\COMP345\\Risk\\Maps");
 	mapList.loadMapByUserChoice(gameMap);
 
 	//Ask the users for the number of players
@@ -25,9 +27,15 @@ GameBoard::GameBoard()
 	} while (std::cin.fail()||players < 2 || players>6);
 
 	for (int i = 0; playerList.size() < players; i++) {
-		playerList.push_back(Player(i));
+		playerList.push_back(new Player(i));
 		playerOrder.push_back(i);
 	}
+
+	//added for aggressive testing
+
+	playerList[0]->setStrategy(new Aggressive());
+
+	//end of aggressive testing
 
 	//Create the deck based on the map
 	mapDeck = Deck();
@@ -44,7 +52,6 @@ GameBoard::GameBoard()
 
 GameBoard::~GameBoard()
 {
-	delete statistics;
 }
 
 void GameBoard::randomizeOrder() {
@@ -80,15 +87,15 @@ void GameBoard::firstPlayer() {
 
 void GameBoard::display() {
 
-	/*gameMap.display();
+	gameMap.display();
 	std::cout << std::endl;
 	mapDeck.displayDeck();
 
-	for (int i = 0; i < playerList.size();i++) {
-		playerList[i].display();
+	for (auto player : playerList) {
+		player->display();
 		std::cout << std::endl;
-	}*/
-	statistics->activateChart();
+	}
+
 }
 
 void GameBoard::setupBoard() {
@@ -109,7 +116,7 @@ void GameBoard::setupBoard() {
 		//Set the owner of the country
 		gameMap.getCountry(countryIndex.back())->setOwner(getCurrentPlayer());
 		//Add the country pointer to the player object
-		playerList[getCurrentPlayer()].addCountry(gameMap.getCountry(countryIndex.back()));
+		playerList[getCurrentPlayer()]->addCountry(gameMap.getCountry(countryIndex.back()));
 		//remove it from the temp index
 		countryIndex.pop_back();
 		//Go to next player
@@ -128,59 +135,36 @@ void GameBoard::setupBoard() {
 		//For every player
 		for (int j = 0; j < playerList.size(); j++) {
 
-			target = std::rand() % playerList[getCurrentPlayer()].getNumberOfOwnedCountries();
+			target = std::rand() % playerList[getCurrentPlayer()]->getNumberOfOwnedCountries();
 
-			playerList[getCurrentPlayer()].placeOneArmy(target);
+			playerList[getCurrentPlayer()]->placeOneArmy(target);
 
 			nextPlayer();
 
 		}
 
 	}
-
-	vector<Player*> temp;
-
-	for (int i = 0; i < playerList.size(); i++) {
-		temp.push_back(&playerList[i]);
-	}
-
-	statistics = new ChartView(temp, gameMap.size());
-	statistics->activateChart();
 }
 
-Player * GameBoard::getPlayer(int id)
+Player* GameBoard::getPlayer(int id)
 {
 	if (id >= 0 && id < playerList.size())
-		return &playerList[id];
+		return playerList[id];
 
 	return nullptr;
 }
 
-std::vector<Player*> GameBoard::getPlayerList()
+vector<Player*> GameBoard::getPlayerList()
 {
-	vector<Player*> temp;
-
-	for (int i = 0; i < playerList.size(); i++) {
-		temp.push_back(&playerList[i]);
-	}
-
-	return temp;
+	return playerList;
 }
 
-Map* GameBoard::getMap()
+Map& GameBoard::getMap()
 {
-	return &gameMap;
+	return gameMap;
 }
 
-void GameBoard::giveAllCountriesToPlayer(int id)
+Deck& GameBoard::getDeck()
 {
-	vector<Country*>countryList;
-
-	for (int i = 0; i < gameMap.size(); i++) {
-		countryList.push_back(gameMap.getCountry(i));
-		if (gameMap.getCountry(i)->getOwner() != id)
-			playerList[gameMap.getCountry(i)->getOwner()].removeCountry(gameMap.getCountry(i)->getName());
-	}
-
-	playerList[id].setCountries(countryList);
+	return mapDeck;
 }

@@ -48,9 +48,6 @@ void Player::removeCountry(string name) {
 		}
 	if (target > -1)
 		countries.erase(countries.begin() + target);
-	//Added for observer pattern
-	//To ensure chart is updated
-	notify();
 }
 
 void Player::placeOneArmy(int countryIndex) {
@@ -75,26 +72,22 @@ void Player::setCountries(vector<Country*> list)
 	for (int i = 0; i < list.size(); i++)
 		countries.push_back(list[i]);
 
-	//Added for observer pattern
-	//In case game is started with specified countries for players
-	notify();
 }
 
 void Player::diceImp(int num)
 {
-	//Dice Thing
 
 	cout<<"diceroll of player " << id <<endl;
 }
 
-void Player::reinforce()
+void Player::reinforce(Deck* deck)
 {
-	cout << "reinforced " << endl;
+	this->playerStrategy->s_reinforce(deck, this);
 }
 
 void Player::attack()
 {
-	cout << "attacked" << endl;
+	cout << "attack" << endl;
 }
 
 void Player::fortify()
@@ -113,3 +106,22 @@ void Player::display() {
 
 }
 
+
+void Player::setStrategy(Strategy* newStrategy) {
+	playerStrategy =  newStrategy;
+}
+
+Hand* Player::getHand()
+{
+	return &m_hand;
+}
+
+void Player::setOrigin(Country * country)
+{
+	origin = country;
+}
+
+Country * Player::getOrigin()
+{
+	return origin;
+}

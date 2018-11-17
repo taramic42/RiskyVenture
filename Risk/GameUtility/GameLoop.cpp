@@ -6,12 +6,9 @@ GameLoop::GameLoop() {}
 GameLoop::~GameLoop() {}
 
 //initializer needs to be used
-GameLoop::GameLoop(vector<Player*> Players, Map &Map) : currentPlayer(0), turnsPlayed(0), map(&Map) {
+GameLoop::GameLoop(vector<Player*> Players, Map &Map, Deck &Deck) : currentPlayer(0), turnsPlayed(0), map(&Map), deck(&Deck), players(Players){
 
 	//fill vector of players
-	for (auto i : Players) {
-		players.push_back(i);
-	}
 }
 
 void GameLoop::gameLoop() {
@@ -34,7 +31,7 @@ void GameLoop::gameLoop() {
 		prompt();
 		
 		//simple stopping mechanism for testing purposes
-		if (turnsPlayed >= 10)
+		if (turnsPlayed == 10)
 			giveAllCountries(currentPlayer);
 
 
@@ -50,7 +47,7 @@ void GameLoop::prompt() {
 	cout << "Player " << currentPlayer+1 << " is currently playing" << endl;
 
 	//bizarre syntax if pointer of vectors is passed the pointer dereference needs to happen before the [] operator
-	players[currentPlayer]->reinforce();
+	players[currentPlayer]->reinforce(deck);
 	players[currentPlayer]->attack();
 	players[currentPlayer]->fortify();
 }
@@ -63,10 +60,14 @@ void GameLoop::giveAllCountries(int playerLoc) {
 
 	for (int i = 0; i < map->size(); i++) {
 		temp.push_back(map->getCountry(i));
-		if(temp[i]->getOwner()!=playerLoc)
-			players[temp[i]->getOwner()]->removeCountry(temp[i]->getName());
 		temp[i]->setOwner(players[playerLoc]->getId());
 	}
 
 	players[playerLoc]->setCountries(temp);
+}
+
+
+void GameLoop::display() {
+	for (auto i : players)
+		i->display();
 }

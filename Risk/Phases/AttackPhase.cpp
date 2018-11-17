@@ -35,18 +35,8 @@ void AttackPhase::prompt() {
 		else if (choice == 'y') {
 			//put main attack and choice logic here
 			
-			int countryIndex = displayAndChooseCountry()-1;
-			countryIndex = attackFromCountry(countryIndex);
-				
-			while (countryIndex >= 0) {
-				countryIndex = thePlayer->getNumberOfOwnedCountries() - 1;
-				countryIndex = attackFromCountry(countryIndex);
-			}
-
-
-			return;
-		}
-		else if (choice == 'n') {
+			int countryIndex = displayAndChooseCountry();
+			attackFromCountry(countryIndex-1);
 			return;
 		}
 		else {
@@ -96,7 +86,7 @@ int AttackPhase::displayAndChooseCountry() {
 
 
 
-int AttackPhase::attackFromCountry(int fromCountry) {
+void AttackPhase::attackFromCountry(int fromCountry) {
 	//display adjacent list
 
 	int size = eligibleCountries[fromCountry]->getNumberOfBorderingCountries();
@@ -237,7 +227,6 @@ int AttackPhase::attackFromCountry(int fromCountry) {
 				eligibleCountries[fromCountry]->addArmies(-armyAmount);
 				eligibleTargets[choice]->addArmies(armyAmount);
 				command = 'n';
-				return choice;
 
 			}
 			else if(eligibleCountries[fromCountry]->getArmyCount()==1){
@@ -245,7 +234,6 @@ int AttackPhase::attackFromCountry(int fromCountry) {
 				//Attacker only has 1 army left in origin country
 				cout << "You only have 1 army left in " << eligibleCountries[fromCountry]->getName() << ". Ending attack phase." << endl;
 				command = 'n';
-				return -1;
 			}
 			else {
 				//ask for continuence
@@ -256,12 +244,10 @@ int AttackPhase::attackFromCountry(int fromCountry) {
 
 		} while (command == 'y' || command == 'Y');
 	}
-	else {
+	else
 		cout << "You own all countries that border " << eligibleCountries[fromCountry]->getName() << endl;
-		return -1;
-	}
 
-	return -1;
+	
 }
 
 bool AttackPhase::eligibleAdjacentCountries(Country* origin, Country* target){
@@ -282,5 +268,14 @@ void AttackPhase::conquerCountry(Country * target)
 	int defenderId = target->getOwner();
 	playerList[defenderId]->removeCountry(target->getName());
 	thePlayer->addCountry(target);
+
+}
+
+
+//added for the Aggressive Strategy Class
+
+void AttackPhase::attackFromCountry(int choice, int target){
+
+
 
 }

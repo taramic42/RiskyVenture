@@ -12,7 +12,7 @@ class ReinforcePhase {
 public:
 	ReinforcePhase();
 	~ReinforcePhase();
-	ReinforcePhase(Player &Player);
+	ReinforcePhase(Player *Player);
 
 	void getArmies();
 	void getContinentBonus(Map* map);
@@ -20,7 +20,7 @@ public:
 	void placeArmies(int numOfArmies, int countryChoice);
 	void prompt();
 	void displayOwnedCountries();
-	void cardExchange(Deck d, Hand h);
+	void cardExchange(Deck* d, Hand* h);
 
 
 private:

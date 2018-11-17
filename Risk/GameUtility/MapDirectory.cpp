@@ -33,8 +33,12 @@ MapDirectory::~MapDirectory()
 
 void MapDirectory::loadMapByUserChoice(Map& mapObject) {
 
-	if (mapPaths.size() == 0)
+	if (mapPaths.size() == 0) {
 		std::cout << "Warning! No valid maps are in the Map directory." << std::endl;
+		//should exit if no valid maps shown
+		cin.get();
+		exit(0);
+	}
 	else {
 		std::cout << "Please select a map from the following list of valid files by inputing the number to the left of the desired entry: " << std::endl;
 		std::cout << "Press enter to activate input." << std::endl;

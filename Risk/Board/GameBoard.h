@@ -5,7 +5,8 @@
 #include "../Player/Player.h"
 #include "../Card/Deck.hpp"
 #include "../MapClass/Map.h"
-#include "../../Risk_Master/Risk_Master/ChartView.h"
+
+
 class GameBoard
 {
 public:
@@ -20,17 +21,18 @@ public:
 	void setupBoard();
 
 	Player* getPlayer(int id);
+	
+	//added for game loop
 	std::vector<Player*> getPlayerList();
-	Map* getMap();
+	Map& getMap();
+	Deck& getDeck();
 
-	void giveAllCountriesToPlayer(int id);
 
 private:
 	int currentPlayer;
 	std::vector<int> playerOrder;
-	std::vector<Player> playerList;
+	std::vector<Player*> playerList;
 	Map gameMap;
 	Deck mapDeck;
-	ChartView* statistics;
 };
 

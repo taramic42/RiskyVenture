@@ -5,7 +5,7 @@ using namespace std;
 ReinforcePhase::ReinforcePhase() {}
 ReinforcePhase::~ReinforcePhase() {}
 
-ReinforcePhase::ReinforcePhase(Player &Player) : thePlayer(&Player) {}
+ReinforcePhase::ReinforcePhase(Player *Player) : thePlayer(Player) {}
 
 void ReinforcePhase::getArmies() {
 
@@ -93,11 +93,11 @@ void ReinforcePhase::prompt() {
 	placeArmies(numOfArmies, countryChoice - 1);
 }
 
-void ReinforcePhase::cardExchange(Deck d, Hand h) {
+void ReinforcePhase::cardExchange(Deck* d, Hand* h) {
 
-	if (h.handSize() >= 5)
+	if (h->handSize() >= 5)
 	{
-		int armies = h.exchange(d);
+		int armies = h->exchange(*d);
 		thePlayer->addArmiesToPlaceOnBoard(armies);
 	}
 

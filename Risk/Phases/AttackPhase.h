@@ -22,7 +22,13 @@ public:
 	void prompt();
 
 
-	int attackFromCountry(int fromCountry);
+	void attackFromCountry(int fromCountry);
+
+
+	//added overloaded member function for Aggressive Strategy
+	void attackFromCountry(int choice, int target);
+
+
 	int displayAndChooseCountry();
 	bool eligibleAdjacentCountries(Country* origin, Country* target);
 	void conquerCountry(Country* target);
