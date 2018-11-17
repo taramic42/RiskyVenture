@@ -1,3 +1,0 @@
-Fortification phase needs to be implemented as a seperate class.
-
-Currently it only exists as a main function. (Not very useful)
