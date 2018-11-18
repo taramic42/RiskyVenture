@@ -52,6 +52,7 @@ void GameLoop::prompt() {
 	players[currentPlayer]->attack(players);
 	system("pause");
 	players[currentPlayer]->fortify();
+	system("pause");
 }
 
 

@@ -32,6 +32,34 @@ GameBoard::GameBoard()
 		playerList.push_back(new Player(i));
 		playerOrder.push_back(i);
 	}
+	std::cout << "Here is the list of players: " << std::endl;
+	for (int i = 0; i < playerList.size(); i++) {
+		std::cout << i<<" Player " << playerList[i]->getId() + 1 << std::endl;
+	}
+	std::cout << "By default, all players are set to Human" << std::endl;
+	std::cout << "You can change the player type to:\nAggressive AI\nPassive AI" << std::endl;
+	std::cout << "Select a player to change the type, or enter -1 to keep all players as Human" << std::endl;
+	int sel;
+	while (1) {
+		cin.clear();
+		cin.ignore();
+		cin >> sel;
+		if (sel < -1 || sel>playerList.size()) {
+			std::cout << "Herp Derp...choose a valid number" << std::endl;
+		}
+
+		continue;
+	}
+	while (1) 
+		{
+			std::cout << "You chose "<< playerList[sel]->getId()+1 << std::endl;
+			std::cout << "To make the player an aggressive AI, enter 1" << std::endl;
+			std::cout << "To make the player an Passive AI, enter 2" << std::endl;
+			std::cout << "Enter 0 to keep default settings"  << std::endl;
+	}
+
+
+
 
 	//added for aggressive testing
 

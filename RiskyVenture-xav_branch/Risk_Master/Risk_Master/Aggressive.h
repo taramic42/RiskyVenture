@@ -14,7 +14,7 @@ public:
 	void attack(Player*, vector<Player*>);
 	void fortify();
 
-	void setStrongest(int choice);
+	
 	int findStrongestCountry();
 
 private:

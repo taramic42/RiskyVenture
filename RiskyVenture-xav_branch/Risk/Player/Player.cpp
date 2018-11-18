@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "Player.h"
+#include "../Phases/Fortify.h"
 
 Player::Player() {}
 Player::~Player() {}
@@ -92,7 +93,10 @@ void Player::attack(vector<Player*> players)
 
 void Player::fortify()
 {
-	cout << "fortify" << endl;
+	Fortify phase(this);
+
+	phase.prompt();
+	//playerStrategy->fortify();
 }
 
 void Player::display() {

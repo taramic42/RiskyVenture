@@ -12,5 +12,5 @@ int main() {
 	newGameLoop.gameLoop();
 	
 
-	system("pause");
+	cin.get();
 }

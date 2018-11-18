@@ -47,7 +47,8 @@ void MapDirectory::loadMapByUserChoice(Map& mapObject) {
 		int index;
 		do {
 			std::cin.clear();
-			std::cin.ignore();
+			//std::cin.ignore();
+			//This god damn bug...reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee!
 
 			std::cin >> index;
 

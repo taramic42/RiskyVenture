@@ -11,7 +11,7 @@ private:
 	vector<Player*> playerList;
 	//AI flag
 	bool successfullyConquered;
-	
+
 
 
 public:

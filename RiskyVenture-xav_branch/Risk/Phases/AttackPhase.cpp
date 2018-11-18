@@ -5,15 +5,15 @@ AttackPhase::AttackPhase() {
 
 AttackPhase::~AttackPhase() {}
 
-AttackPhase::AttackPhase(Player &player, vector<Player*> players) : thePlayer(&player){
+AttackPhase::AttackPhase(Player &player, vector<Player*> players) : thePlayer(&player) {
 
 	for (int i = 0; i < players.size(); i++)
 		playerList.push_back(players[i]);
 
 }
 
-AttackPhase::AttackPhase(Player &player, vector<Player*> players, Country* source, Country* targ){
-	thePlayer= &player;
+AttackPhase::AttackPhase(Player &player, vector<Player*> players, Country* source, Country* targ) {
+	thePlayer = &player;
 	for (int i = 0; i < players.size(); i++)
 		playerList.push_back(players[i]);
 	begAIAssult(source, targ);
@@ -30,44 +30,44 @@ using namespace std;
 void AttackPhase::begAIAssult(Country* srcCount, Country* targCount) {
 	successfullyConquered = false;
 	while (!successfullyConquered) {
-	//finds the Maximum assult troops to send and Maximum troops to defend
-	int maxInvade;
-	int maxDefend;
-	if (srcCount->getArmyCount()<2) {
-		cout << "No more armies to attack from " << srcCount->getName() << endl;
-		successfullyConquered = true;
-		return;
-	}
-	
-	if (srcCount->getArmyCount()>3) {
-		maxInvade = 3;
-	}
-	else {
-		maxInvade = srcCount->getArmyCount() - 1;
-	}
-	if (targCount->getArmyCount() >= 2) {
-		maxDefend = 2;
-	}
-	else {
-		maxDefend = targCount->getArmyCount();
-	}
+		//finds the Maximum assult troops to send and Maximum troops to defend
+		int maxInvade;
+		int maxDefend;
+		if (srcCount->getArmyCount() < 2) {
+			cout << "No more armies to attack from " << srcCount->getName() << endl;
+			successfullyConquered = true;
+			return;
+		}
 
-	//Roll attacker dice
-	cout << "\n>>>>>>>>>>>>>>>>>>Your troopaloops from " << srcCount->getName() << " are now attacking " << targCount->getName() << "..." << endl;
-	cout <<"       "<< srcCount->getName() << "-" << " has " << srcCount->getArmyCount() <<" army/armies" <<endl;
-	cout <<"       "<< targCount->getName() << "-" << " has " << targCount->getArmyCount() << " army/armies" << endl;
-	cout << "Result of rolls for the Attacking Country " << srcCount->getName() <<":" << endl;
-	thePlayer->getDice()->diceRolling(maxInvade);
-	//Roll defender dice
-	cout << "Result of rolls for the Defending Country " << targCount->getName() <<":" << endl;
-	playerList[targCount->getOwner()]->getDice()->diceRolling(maxDefend);
-	cout << "------------------------------------------------------------------------------------------------------------------\n" << endl;
+		if (srcCount->getArmyCount() > 3) {
+			maxInvade = 3;
+		}
+		else {
+			maxInvade = srcCount->getArmyCount() - 1;
+		}
+		if (targCount->getArmyCount() >= 2) {
+			maxDefend = 2;
+		}
+		else {
+			maxDefend = targCount->getArmyCount();
+		}
 
-	
-	int result;
-	//Determine result
-	result = thePlayer->getDice()->resultOfBattle(maxInvade, maxDefend, *(playerList[targCount->getOwner()]->getDice()));
-	analy(result, srcCount, targCount);
+		//Roll attacker dice
+		cout << "\n>>>>>>>>>>>>>>>>>>Your troopaloops from " << srcCount->getName() << " are now attacking " << targCount->getName() << "..." << endl;
+		cout << "       " << srcCount->getName() << "-" << " has " << srcCount->getArmyCount() << " army/armies" << endl;
+		cout << "       " << targCount->getName() << "-" << " has " << targCount->getArmyCount() << " army/armies" << endl;
+		cout << "Result of rolls for the Attacking Country " << srcCount->getName() << ":" << endl;
+		thePlayer->getDice()->diceRolling(maxInvade);
+		//Roll defender dice
+		cout << "Result of rolls for the Defending Country " << targCount->getName() << ":" << endl;
+		playerList[targCount->getOwner()]->getDice()->diceRolling(maxDefend);
+		cout << "------------------------------------------------------------------------------------------------------------------\n" << endl;
+
+
+		int result;
+		//Determine result
+		result = thePlayer->getDice()->resultOfBattle(maxInvade, maxDefend, *(playerList[targCount->getOwner()]->getDice()));
+		analy(result, srcCount, targCount);
 	}//end while
 	return;
 }
@@ -88,9 +88,9 @@ void AttackPhase::prompt() {
 		}
 		else if (choice == 'y') {
 			//put main attack and choice logic here
-			
+
 			int countryIndex = displayAndChooseCountry();
-			attackFromCountry(countryIndex-1);
+			attackFromCountry(countryIndex - 1);
 			return;
 		}
 		else {
@@ -111,12 +111,12 @@ int AttackPhase::displayAndChooseCountry() {
 
 	for (int i = 0; i < thePlayer->getCountriesOwned().size(); i++) {
 		if (thePlayer->getCountriesOwned()[i]->getArmyCount() > 1) {
-			
+
 			cout << count << " " << thePlayer->getCountriesOwned()[i]->getName() << endl;
 
 			//fill eligibleCountries container
 			eligibleCountries.push_back(thePlayer->getCountriesOwned()[i]);
-			
+
 			count++;
 		}
 	}
@@ -132,7 +132,7 @@ int AttackPhase::displayAndChooseCountry() {
 		if (cin.fail() || choice < 1 || choice > eligibleCountries.size())
 			cout << "Please be sure that the value entered is a integer in the range of 1 to " << eligibleCountries.size() << endl;
 
-	}while(cin.fail() || choice < 1 || choice > eligibleCountries.size());
+	} while (cin.fail() || choice < 1 || choice > eligibleCountries.size());
 
 	return choice;
 
@@ -157,7 +157,7 @@ void AttackPhase::attackFromCountry(int fromCountry) {
 
 	//get user input
 	int choice;
-	
+
 	if (eligibleTargets.size() > 0) {
 		do {
 			cin.clear();
@@ -228,35 +228,35 @@ void AttackPhase::attackFromCountry(int fromCountry) {
 				if (armyAmount > 1 && eligibleTargets[choice]->getArmyCount() > 1)
 					//Both att and def have more than 1 army
 					if (result == 0) {
-					//Both countries lose an army
+						//Both countries lose an army
 						eligibleCountries[fromCountry]->addArmies(-1);
 						eligibleTargets[choice]->addArmies(-1);
 					}
-					
+
 					else if (result > 0) {
-					//Defenders lose 2 armies
+						//Defenders lose 2 armies
 						if (eligibleTargets[choice]->getArmyCount() > 1)
 							eligibleTargets[choice]->addArmies(-2);
 						else
 							eligibleTargets[choice]->addArmies(-1);
 					}
 					else {
-					//Attacker loses 2 armies
+						//Attacker loses 2 armies
 						eligibleCountries[fromCountry]->addArmies(-2);
 					}
 				else
 					//One or the other has 1 army
 					if (result > 0) {
-					//Defender loses 1 army
+						//Defender loses 1 army
 						eligibleTargets[choice]->addArmies(-1);
 					}
 					else {
-					//Attacker loses 1 army
+						//Attacker loses 1 army
 						eligibleCountries[fromCountry]->addArmies(-1);
 					}
-				
+
 			}
-			if (eligibleTargets[choice]->getArmyCount()==0) {
+			if (eligibleTargets[choice]->getArmyCount() == 0) {
 				//Attacker has conquered country
 				cout << eligibleTargets[choice] << " successfully conquered." << endl;
 				conquerCountry(eligibleTargets[choice]);
@@ -273,9 +273,9 @@ void AttackPhase::attackFromCountry(int fromCountry) {
 					if (cin.fail())
 						cout << "Invalid input. Try again." << endl;
 					else if (armyAmount<1 || armyAmount>eligibleCountries[fromCountry]->getArmyCount() - 1)
-						cout << "Invalid amount (likely not enough armies to send). Allowable range: 1 to"<< eligibleCountries[fromCountry]->getArmyCount()-1<< endl;
+						cout << "Invalid amount (likely not enough armies to send). Allowable range: 1 to" << eligibleCountries[fromCountry]->getArmyCount() - 1 << endl;
 
-				} while (cin.fail()|| armyAmount<1 || armyAmount>eligibleCountries[fromCountry]->getArmyCount() - 1);
+				} while (cin.fail() || armyAmount<1 || armyAmount>eligibleCountries[fromCountry]->getArmyCount() - 1);
 
 				//Move armies
 				eligibleCountries[fromCountry]->addArmies(-armyAmount);
@@ -283,8 +283,8 @@ void AttackPhase::attackFromCountry(int fromCountry) {
 				command = 'n';
 
 			}
-			else if(eligibleCountries[fromCountry]->getArmyCount()==1){
-			
+			else if (eligibleCountries[fromCountry]->getArmyCount() == 1) {
+
 				//Attacker only has 1 army left in origin country
 				cout << "You only have 1 army left in " << eligibleCountries[fromCountry]->getName() << ". Ending attack phase." << endl;
 				command = 'n';
@@ -301,10 +301,10 @@ void AttackPhase::attackFromCountry(int fromCountry) {
 	else
 		cout << "You own all countries that border " << eligibleCountries[fromCountry]->getName() << endl;
 
-	
+
 }
 
-bool AttackPhase::eligibleAdjacentCountries(Country* origin, Country* target){
+bool AttackPhase::eligibleAdjacentCountries(Country* origin, Country* target) {
 	//check that origin has different
 	if (origin->getOwner() == target->getOwner())
 		return false;
@@ -378,21 +378,21 @@ void AttackPhase::analy(int res, Country* srcCount, Country* targCount) {
 //overloaded to work with AI(Aggressive)
 void AttackPhase::conquerCountry(Country* source, Country* target)
 {
-	cout << 
-"\n____________________________________________________________________________________________\n\n"
-"++++++++++++++++++++++++++++++ YOU HAVE CONQUERED: "<< target->getName() << "  +++++++++++++++++++++++++++++++++"<<
-"\n___________________________________________________________________________________________\n" << endl;
+	cout <<
+		"\n____________________________________________________________________________________________\n\n"
+		"++++++++++++++++++++++++++++++ YOU HAVE CONQUERED: " << target->getName() << "  +++++++++++++++++++++++++++++++++" <<
+		"\n___________________________________________________________________________________________\n" << endl;
 	cout << "--> You have conquered " << target->getName() << " from Player " << target->getOwner() + 1 << endl;
 	int defenderId = target->getOwner();
 	playerList[defenderId]->removeCountry(target->getName());
 	thePlayer->addCountry(target);
 
 
-		
-		cout << "--> You now have a total of " << source->getArmyCount() << " armies in " << source->getName() << endl;
-		cout << "--> Sending 1 army to occupy " << target->getName()<< endl;
-		
-			source->addArmies(-1);
-			target->addArmies(1);
-			return;
+
+	cout << "--> You now have a total of " << source->getArmyCount() << " armies in " << source->getName() << endl;
+	cout << "--> Sending 1 army to occupy " << target->getName() << endl;
+
+	source->addArmies(-1);
+	target->addArmies(1);
+	return;
 }

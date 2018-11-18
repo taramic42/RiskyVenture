@@ -1,7 +1,6 @@
 #pragma once
 class Player;
 class Deck;
-//class vector;
 #include <vector>
 
 
@@ -13,9 +12,9 @@ public:
 	Strategy();
 	virtual ~Strategy();
 
-	virtual void reinforce(Deck*, Player*) =0 {};
-	virtual void attack(Player*,vector<Player*>) =0 {};
-	virtual void fortify() =0{};
+	virtual void reinforce(Deck*, Player*) = 0 {};
+	virtual void attack(Player*, vector<Player*>) = 0 {};
+	virtual void fortify() = 0 {};
 
 };
 
