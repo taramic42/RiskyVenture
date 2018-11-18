@@ -1,0 +1,3 @@
+﻿  GameBoard.cpp
+c:\users\chris\desktop\riskyventure-xav_branch\risk\board\gameboard.cpp(202): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Risk_Master.vcxproj -> C:\Users\Chris\Desktop\RiskyVenture-xav_branch\Risk_Master\x64\Debug\Risk_Master.exe
