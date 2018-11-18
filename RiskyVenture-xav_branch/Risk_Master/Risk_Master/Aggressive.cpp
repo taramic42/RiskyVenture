@@ -93,10 +93,12 @@ void Aggressive::attack(Player* passedplayer, vector<Player*> playerList) {
 			attackTarget = i;
 			//here we call AttackPhase()..
 			if (attackFrom->getArmyCount() >= 2) {
+
+				std::cout << "Now moving to attack boprder country " << attackTarget->getName() << endl;
 				AttackPhase(*player, playerList, attackFrom, attackTarget);
 			}
 			else {
-				std::cout << "You no longer have enough armies in " << attackTarget->getName() << endl;
+				std::cout << "You no longer have enough armies to attack " << attackTarget->getName() << endl;
 				return;
 			}
 

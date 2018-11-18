@@ -36,7 +36,9 @@ GameBoard::GameBoard()
 	for (int i = 0; i < playerList.size(); i++) {
 		std::cout << i<<" Player " << playerList[i]->getId() + 1 << std::endl;
 	}
-	std::cout << "By default, all players are set to Human" << std::endl;
+
+	//you can use this logic or parts of it to build a method........
+	/*std::cout << "By default, all players are set to Human" << std::endl;
 	std::cout << "You can change the player type to:\nAggressive AI\nPassive AI" << std::endl;
 	std::cout << "Select a player to change the type, or enter -1 to keep all players as Human" << std::endl;
 	int sel;
@@ -57,16 +59,17 @@ GameBoard::GameBoard()
 			std::cout << "To make the player an Passive AI, enter 2" << std::endl;
 			std::cout << "Enter 0 to keep default settings"  << std::endl;
 	}
-
+*/
 
 
 
 	//added for aggressive testing
-
+	//manually set this during demo
 	//Aggressive *testStrat = new Aggressive();
-
-	playerList[0]->setStrategy(new Aggressive());
-
+	for (int i = 0; i < playerList.size(); i++) {
+		playerList[i]->setStrategy(new Aggressive());
+	}
+	
 	//end of aggressive testing
 
 	//Create the deck based on the map

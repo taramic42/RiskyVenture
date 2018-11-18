@@ -1,3 +1,6 @@
 ﻿  GameBoard.cpp
-c:\users\grego\desktop\xavswfortification\riskyventure-xav_branch\risk\board\gameboard.cpp(139): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\grego\desktop\xavswfortification\riskyventure-xav_branch\risk\board\gameboard.cpp(164): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Aggressive.cpp
+  main.cpp
+  Generating Code...
   Risk_Master.vcxproj -> C:\Users\grego\Desktop\XavsWFortification\RiskyVenture-xav_branch\Risk_Master\x64\Debug\Risk_Master.exe
