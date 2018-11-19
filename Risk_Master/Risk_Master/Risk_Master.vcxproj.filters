@@ -75,6 +75,21 @@
     <ClInclude Include="ChartView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Aggressive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Passive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStrategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Strategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Risk\Phases\Fortify.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Risk_Master.cpp">
@@ -132,6 +147,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ChartView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Aggressive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Passive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStrategy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Strategy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Risk\Phases\Fortify.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

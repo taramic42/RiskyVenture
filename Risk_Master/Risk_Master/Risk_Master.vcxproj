@@ -155,12 +155,17 @@
     <ClInclude Include="..\..\Risk\MapClass\Country.h" />
     <ClInclude Include="..\..\Risk\MapClass\Map.h" />
     <ClInclude Include="..\..\Risk\Phases\AttackPhase.h" />
+    <ClInclude Include="..\..\Risk\Phases\Fortify.h" />
     <ClInclude Include="..\..\Risk\Phases\ReinforcePhase.h" />
     <ClInclude Include="..\..\Risk\Player\Player.h" />
+    <ClInclude Include="Aggressive.h" />
     <ClInclude Include="ChartView.h" />
     <ClInclude Include="Observer.h" />
+    <ClInclude Include="Passive.h" />
+    <ClInclude Include="PlayerStrategy.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Strategy.h" />
     <ClInclude Include="Subject.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -177,14 +182,19 @@
     <ClCompile Include="..\..\Risk\MapClass\Country.cpp" />
     <ClCompile Include="..\..\Risk\MapClass\Map.cpp" />
     <ClCompile Include="..\..\Risk\Phases\AttackPhase.cpp" />
+    <ClCompile Include="..\..\Risk\Phases\Fortify.cpp" />
     <ClCompile Include="..\..\Risk\Phases\ReinforcePhase.cpp" />
     <ClCompile Include="..\..\Risk\Player\Player.cpp" />
+    <ClCompile Include="Aggressive.cpp" />
     <ClCompile Include="ChartView.cpp" />
     <ClCompile Include="Observer.cpp" />
+    <ClCompile Include="Passive.cpp" />
+    <ClCompile Include="PlayerStrategy.cpp" />
     <ClCompile Include="Risk_Master.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Strategy.cpp" />
     <ClCompile Include="Subject.cpp" />
   </ItemGroup>
   <ItemGroup>
