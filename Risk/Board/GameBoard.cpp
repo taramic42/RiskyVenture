@@ -1,5 +1,9 @@
 #include "GameBoard.h"
 #include "../GameUtility/MapDirectory.h"
+#include "../../Risk_Master/Risk_Master/Strategy.h"
+#include "../../Risk_Master/Risk_Master/Aggressive.h"
+#include "../../Risk_Master/Risk_Master/Passive.h"
+#include "../../Risk_Master/Risk_Master/PlayerStrategy.h"
 
 GameBoard::GameBoard()
 {
@@ -25,9 +29,83 @@ GameBoard::GameBoard()
 	} while (std::cin.fail()||players < 2 || players>6);
 
 	for (int i = 0; playerList.size() < players; i++) {
-		playerList.push_back(Player(i));
+		playerList.push_back(new Player(i));
 		playerOrder.push_back(i);
 	}
+
+	std::cout << "Here is the list of players: " << std::endl;
+	for (int i = 0; i < playerList.size(); i++) {
+		std::cout << i << " Player " << playerList[i]->getId() + 1 << std::endl;
+		playerList[i]->addArmiesToPlaceOnBoard(0);
+	}
+
+	//you can use this logic or parts of it to build a method........
+	/*std::cout << "By default, all players are set to Human" << std::endl;
+	std::cout << "You can change the player type to:\nAggressive AI\nPassive AI" << std::endl;
+	std::cout << "Select a player to change the type, or enter -1 to keep all players as Human" << std::endl;
+	int sel;
+	for(int i=0;i<playerList.size();i++)
+	{
+	cin.clear();
+	cin.ignore();
+	cin >> sel;
+	if (sel < -1 || sel>playerList.size()) {
+	std::cout << "Herp Derp...choose a valid number" << std::endl;
+	continue;
+	}
+	if(sel==-1)
+	{
+	for (int j = 0;j<playerList.size();j++)
+	{
+	playerList[j]->setStrategy(new PlayerStrategy());
+	}
+	break;
+	}
+	else
+	{
+	std::cout << "You chose " << playerList[sel]->getId() + 1 << std::endl;
+	std::cout << "To make the player an aggressive AI, enter 1" << std::endl;
+	std::cout << "To make the player an Passive AI, enter 2" << std::endl;
+	std::cout << "Enter 0 to keep default settings" << std::endl;
+	cin >> sel;
+	if(sel==1)
+	{
+	playerList[sel]->setStrategy(new Aggressive());
+	cout << playerList[sel]->getId() + 1 << " is now aggressive\n";
+	continue;
+	}
+	if (sel == 2)
+	{
+	playerList[sel]->setStrategy(new Passive());
+	cout << playerList[sel]->getId() + 1 << " is now passive \n";
+	continue;
+	}
+	if (sel == 0)
+	{
+	playerList[sel]->setStrategy(new PlayerStrategy());
+	cout << playerList[sel]->getId() + 1 << " stays as default\n";
+	continue;
+
+	}
+
+	}
+
+	continue;
+	}*/
+
+	//added for aggressive testing
+	//manually set this during demo
+	//Aggressive *testStrat = new Aggressive();
+	for (int i = 0; i < playerList.size(); i++) {
+		playerList[0]->setStrategy(new Aggressive());
+		playerList[1]->setStrategy(new Passive());
+		if (i > 1)
+		{
+			playerList[i]->setStrategy(new PlayerStrategy());
+		}
+	}
+
+	//end of aggressive testing
 
 	//Create the deck based on the map
 	mapDeck = Deck();
@@ -109,7 +187,7 @@ void GameBoard::setupBoard() {
 		//Set the owner of the country
 		gameMap.getCountry(countryIndex.back())->setOwner(getCurrentPlayer());
 		//Add the country pointer to the player object
-		playerList[getCurrentPlayer()].addCountry(gameMap.getCountry(countryIndex.back()));
+		playerList[getCurrentPlayer()]->addCountry(gameMap.getCountry(countryIndex.back()));
 		//remove it from the temp index
 		countryIndex.pop_back();
 		//Go to next player
@@ -128,9 +206,9 @@ void GameBoard::setupBoard() {
 		//For every player
 		for (int j = 0; j < playerList.size(); j++) {
 
-			target = std::rand() % playerList[getCurrentPlayer()].getNumberOfOwnedCountries();
+			target = std::rand() % playerList[getCurrentPlayer()]->getNumberOfOwnedCountries();
 
-			playerList[getCurrentPlayer()].placeOneArmy(target);
+			playerList[getCurrentPlayer()]->placeOneArmy(target);
 
 			nextPlayer();
 
@@ -141,7 +219,7 @@ void GameBoard::setupBoard() {
 	vector<Player*> temp;
 
 	for (int i = 0; i < playerList.size(); i++) {
-		temp.push_back(&playerList[i]);
+		temp.push_back(playerList[i]);
 	}
 
 	statistics = new ChartView(temp, gameMap.size());
@@ -151,7 +229,7 @@ void GameBoard::setupBoard() {
 Player * GameBoard::getPlayer(int id)
 {
 	if (id >= 0 && id < playerList.size())
-		return &playerList[id];
+		return playerList[id];
 
 	return nullptr;
 }
@@ -161,15 +239,15 @@ std::vector<Player*> GameBoard::getPlayerList()
 	vector<Player*> temp;
 
 	for (int i = 0; i < playerList.size(); i++) {
-		temp.push_back(&playerList[i]);
+		temp.push_back(playerList[i]);
 	}
 
 	return temp;
 }
 
-Map* GameBoard::getMap()
+Map& GameBoard::getMap()
 {
-	return &gameMap;
+	return gameMap;
 }
 
 void GameBoard::giveAllCountriesToPlayer(int id)
@@ -179,8 +257,13 @@ void GameBoard::giveAllCountriesToPlayer(int id)
 	for (int i = 0; i < gameMap.size(); i++) {
 		countryList.push_back(gameMap.getCountry(i));
 		if (gameMap.getCountry(i)->getOwner() != id)
-			playerList[gameMap.getCountry(i)->getOwner()].removeCountry(gameMap.getCountry(i)->getName());
+			playerList[gameMap.getCountry(i)->getOwner()]->removeCountry(gameMap.getCountry(i)->getName());
 	}
 
-	playerList[id].setCountries(countryList);
+	playerList[id]->setCountries(countryList);
+}
+
+Deck& GameBoard::getDeck()
+{
+	return mapDeck;
 }

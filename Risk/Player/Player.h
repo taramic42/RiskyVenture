@@ -6,6 +6,8 @@
 #include "../Card/Hand.hpp"
 #include "../MapClass/Country.h"
 #include "../../Risk_Master/Risk_Master/Subject.h"
+#include "../../Risk_Master/Risk_Master/Strategy.h"
+
 
 using namespace std;
 
@@ -13,10 +15,13 @@ class Player:public Subject{
 
 private:
 	vector <Country*> countries;
-	vector <Card> hand;
+	Hand m_hand;
 	DiceRollingFacility dice;
 	int id;
 	int armiesToPlaceOnBoard;
+	Strategy *playerStrategy;
+
+	Country* origin;
 public:
 	Player();
 	~Player();
@@ -39,11 +44,18 @@ public:
 
 	void setCountries(vector<Country*> list);
 
-	void reinforce();
-	void attack();
+	void reinforce(Deck* deck);
+	void attack(vector<Player*> players);
 
 	void fortify();
 
 	void display();
+
+	void setStrategy(Strategy* newStrat);
+
+	Hand* getHand();
+
+	void setOrigin(Country* country);
+	Country* getOrigin();
 };
 

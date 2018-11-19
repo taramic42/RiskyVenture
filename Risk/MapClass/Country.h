@@ -35,6 +35,9 @@ public:
     
     void display();
 
+	//for aggressive strategy class
+	std::vector<Country*> getBorderCountries();
+
 private:
 	std::string name;
 	std::string continent;

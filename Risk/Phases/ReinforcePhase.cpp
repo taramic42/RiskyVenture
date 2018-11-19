@@ -5,7 +5,7 @@ using namespace std;
 ReinforcePhase::ReinforcePhase() {}
 ReinforcePhase::~ReinforcePhase() {}
 
-ReinforcePhase::ReinforcePhase(Player &Player) : thePlayer(&Player) {}
+ReinforcePhase::ReinforcePhase(Player *Player) : thePlayer(Player) {}
 
 void ReinforcePhase::getArmies() {
 
@@ -69,35 +69,37 @@ void ReinforcePhase::prompt() {
 
 	int numOfArmies;
 	int countryChoice;
-
-	cout << "How many armies would you like to place?" << endl;
-	cin >> numOfArmies;
-	while (numOfArmies > thePlayer->getArmiesLeftToPlaceOnBoard() || numOfArmies < 0) {
-		cout << "Invalid input try again." << endl;
+	getArmies();
+	while (thePlayer->getArmiesLeftToPlaceOnBoard() > 0) {
+		cout << "How many armies would you like to place? ("<<thePlayer->getArmiesLeftToPlaceOnBoard()<<" left to place)"<< endl;
 		cin >> numOfArmies;
-	}
+		while (numOfArmies > thePlayer->getArmiesLeftToPlaceOnBoard() || numOfArmies < 0) {
+			cout << "Invalid input try again." << endl;
+			cin >> numOfArmies;
+		}
 
-	cout << "On which country would you like to place these armies on?" << endl;
-	cout << endl;
+		cout << "On which country would you like to place these armies on?" << endl;
+		cout << endl;
 
-	displayOwnedCountries();
-	cout << endl;
-	cin >> countryChoice;
-
-	while (countryChoice > thePlayer->getNumberOfOwnedCountries() || countryChoice < 1) {
-		cout << "Invalid input must be in range of 1 to" << thePlayer->getNumberOfOwnedCountries() << "try again." << endl;
+		displayOwnedCountries();
+		cout << endl;
 		cin >> countryChoice;
-	}
 
-	//subtract 1 from countryChoice so you don't go out of bounds
-	placeArmies(numOfArmies, countryChoice - 1);
+		while (countryChoice > thePlayer->getNumberOfOwnedCountries() || countryChoice < 1) {
+			cout << "Invalid input must be in range of 1 to" << thePlayer->getNumberOfOwnedCountries() << "try again." << endl;
+			cin >> countryChoice;
+		}
+
+		//subtract 1 from countryChoice so you don't go out of bounds
+		placeArmies(numOfArmies, countryChoice - 1);
+	}
 }
 
-void ReinforcePhase::cardExchange(Deck d, Hand h) {
+void ReinforcePhase::cardExchange(Deck* d, Hand* h) {
 
-	if (h.handSize() >= 5)
+	if (h->handSize() >= 5)
 	{
-		int armies = h.exchange(d);
+		int armies = h->exchange(*d);
 		thePlayer->addArmiesToPlaceOnBoard(armies);
 	}
 

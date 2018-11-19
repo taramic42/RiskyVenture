@@ -21,14 +21,16 @@ public:
 
 	Player* getPlayer(int id);
 	std::vector<Player*> getPlayerList();
-	Map* getMap();
 
 	void giveAllCountriesToPlayer(int id);
+
+	Map& getMap();
+	Deck& getDeck();
 
 private:
 	int currentPlayer;
 	std::vector<int> playerOrder;
-	std::vector<Player> playerList;
+	std::vector<Player*> playerList;
 	Map gameMap;
 	Deck mapDeck;
 	ChartView* statistics;

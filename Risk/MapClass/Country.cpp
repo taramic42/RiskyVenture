@@ -145,3 +145,8 @@ void Country::display(){
 	}
 	std::cout << std::endl<<std::endl;
 }
+
+std::vector<Country*> Country::getBorderCountries()
+{
+	return borderCountries;
+}

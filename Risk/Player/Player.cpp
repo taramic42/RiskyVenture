@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "Player.h"
+#include "../Phases/Fortify.h"
 
 Player::Player() {}
 Player::~Player() {}
@@ -87,20 +88,24 @@ void Player::diceImp(int num)
 	cout<<"diceroll of player " << id <<endl;
 }
 
-void Player::reinforce()
+void Player::reinforce(Deck* deck)
 {
-	cout << "reinforced " << endl;
+	playerStrategy->reinforce(deck, this);
 }
 
-void Player::attack()
+void Player::attack(vector<Player*> players)
 {
-	cout << "attacked" << endl;
+	playerStrategy->attack(this, players);
 }
 
 void Player::fortify()
 {
-	cout << "fortify" << endl;
+	Fortify phase(this);
+
+	//phase.prompt();
+	playerStrategy->fortify(this);
 }
+
 
 void Player::display() {
 
@@ -111,5 +116,24 @@ void Player::display() {
 		cout << endl;
 	}
 
+}
+
+void Player::setStrategy(Strategy* newStrategy) {
+	playerStrategy = newStrategy;
+}
+
+Hand* Player::getHand()
+{
+	return &m_hand;
+}
+
+void Player::setOrigin(Country * country)
+{
+	origin = country;
+}
+
+Country * Player::getOrigin()
+{
+	return origin;
 }
 
