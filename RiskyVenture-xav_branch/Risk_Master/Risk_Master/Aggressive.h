@@ -12,7 +12,7 @@ public:
 
 	void reinforce(Deck* deck, Player* player);
 	void attack(Player*, vector<Player*>);
-	void fortify();
+	void fortify(Player *player);
 
 	
 	int findStrongestCountry();

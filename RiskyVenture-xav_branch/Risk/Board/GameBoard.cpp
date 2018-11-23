@@ -2,6 +2,11 @@
 #include "../GameUtility/MapDirectory.h"
 #include "../../Risk_Master/Risk_Master/Strategy.h"
 #include "../../Risk_Master/Risk_Master/Aggressive.h"
+#include "../../Risk_Master/Risk_Master/Passive.h"
+#include "../../Risk_Master/Risk_Master/PlayerStrategy.h"
+#include "../../Risk_Master/Risk_Master/Human.h""
+
+
 
 GameBoard::GameBoard()
 {
@@ -35,6 +40,7 @@ GameBoard::GameBoard()
 	std::cout << "Here is the list of players: " << std::endl;
 	for (int i = 0; i < playerList.size(); i++) {
 		std::cout << i<<" Player " << playerList[i]->getId() + 1 << std::endl;
+		playerList[i]->addArmiesToPlaceOnBoard(40);
 	}
 
 	//you can use this logic or parts of it to build a method........
@@ -42,33 +48,68 @@ GameBoard::GameBoard()
 	std::cout << "You can change the player type to:\nAggressive AI\nPassive AI" << std::endl;
 	std::cout << "Select a player to change the type, or enter -1 to keep all players as Human" << std::endl;
 	int sel;
-	while (1) {
+	for(int i=0;i<playerList.size();i++) 
+	{
 		cin.clear();
 		cin.ignore();
 		cin >> sel;
 		if (sel < -1 || sel>playerList.size()) {
 			std::cout << "Herp Derp...choose a valid number" << std::endl;
+			continue;
+		}
+		if(sel==-1)
+		{
+			for (int j = 0;j<playerList.size();j++)
+			{
+				playerList[j]->setStrategy(new PlayerStrategy());
+			}
+			break;
+		}
+		else 
+		{
+			std::cout << "You chose " << playerList[sel]->getId() + 1 << std::endl;
+			std::cout << "To make the player an aggressive AI, enter 1" << std::endl;
+			std::cout << "To make the player an Passive AI, enter 2" << std::endl;
+			std::cout << "Enter 0 to keep default settings" << std::endl;
+			cin >> sel;
+			if(sel==1)
+			{
+				playerList[sel]->setStrategy(new Aggressive());
+				cout << playerList[sel]->getId() + 1 << " is now aggressive\n";
+				continue;
+			}
+			if (sel == 2)
+			{
+				playerList[sel]->setStrategy(new Passive());
+				cout << playerList[sel]->getId() + 1 << " is now passive \n";
+				continue;
+			}
+			if (sel == 0)
+			{
+				playerList[sel]->setStrategy(new PlayerStrategy());
+				cout << playerList[sel]->getId() + 1 << " stays as default\n";
+				continue;
+
+			}
+
 		}
 
 		continue;
-	}
-	while (1) 
-		{
-			std::cout << "You chose "<< playerList[sel]->getId()+1 << std::endl;
-			std::cout << "To make the player an aggressive AI, enter 1" << std::endl;
-			std::cout << "To make the player an Passive AI, enter 2" << std::endl;
-			std::cout << "Enter 0 to keep default settings"  << std::endl;
-	}
-*/
-
-
+	}*/
+	
 
 	//added for aggressive testing
 	//manually set this during demo
 	//Aggressive *testStrat = new Aggressive();
 	for (int i = 0; i < playerList.size(); i++) {
-		playerList[i]->setStrategy(new Aggressive());
+		playerList[0]->setStrategy(new Aggressive());
+		playerList[1]->setStrategy(new Passive());
+		if (i > 1)
+		{
+			playerList[i]->setStrategy(new PlayerStrategy());
+		}
 	}
+	//playerList[0]->setStrategy(new Human());
 	
 	//end of aggressive testing
 

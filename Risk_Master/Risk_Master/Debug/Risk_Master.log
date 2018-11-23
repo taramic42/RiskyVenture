@@ -1,7 +1,0 @@
-﻿  ChartView.cpp
-e:\fall 2018\comp 345\risk_master\risk_master\chartview.cpp(25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-e:\fall 2018\comp 345\risk_master\risk_master\chartview.cpp(27): warning C4018: '<': signed/unsigned mismatch
-e:\fall 2018\comp 345\risk_master\risk_master\chartview.cpp(32): warning C4018: '<': signed/unsigned mismatch
-e:\fall 2018\comp 345\risk_master\risk_master\chartview.cpp(44): warning C4018: '<': signed/unsigned mismatch
-e:\fall 2018\comp 345\risk_master\risk_master\chartview.cpp(59): warning C4018: '<': signed/unsigned mismatch
-  Risk_Master.vcxproj -> E:\Fall 2018\COMP 345\Risk_Master\Debug\Risk_Master.exe

@@ -9,7 +9,7 @@ AttackPhase::AttackPhase(Player &player, vector<Player*> players) : thePlayer(&p
 
 	for (int i = 0; i < players.size(); i++)
 		playerList.push_back(players[i]);
-
+	prompt();
 }
 
 AttackPhase::AttackPhase(Player &player, vector<Player*> players, Country* source, Country* targ) {

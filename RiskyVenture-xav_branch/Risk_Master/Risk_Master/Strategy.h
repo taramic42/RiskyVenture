@@ -14,7 +14,7 @@ public:
 
 	virtual void reinforce(Deck*, Player*) = 0 {};
 	virtual void attack(Player*, vector<Player*>) = 0 {};
-	virtual void fortify() = 0 {};
+	virtual void fortify(Player*) = 0 {};
 
 };
 

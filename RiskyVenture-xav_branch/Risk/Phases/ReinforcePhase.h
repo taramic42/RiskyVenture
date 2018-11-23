@@ -12,7 +12,9 @@ class ReinforcePhase {
 public:
 	ReinforcePhase();
 	~ReinforcePhase();
-	ReinforcePhase(Player *Player);
+	ReinforcePhase(Player *player, Deck* adeck);
+	//use for AI
+	ReinforcePhase(Player *player);
 
 	void getArmies();
 	void getContinentBonus(Map* map);

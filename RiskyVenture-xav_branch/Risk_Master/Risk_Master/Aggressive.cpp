@@ -52,8 +52,7 @@ void Aggressive::reinforce(Deck* Deck, Player* Player) {
 
 
 void Aggressive::attack(Player* passedplayer, vector<Player*> playerList) {
-	//PHIL is doing this
-	//It's done :p
+	
 	player = passedplayer;
 
 	std::cout << "\n\n#############Beginning of Aggressive Attack Phase.#############\n\n" << endl;
@@ -113,38 +112,45 @@ void Aggressive::attack(Player* passedplayer, vector<Player*> playerList) {
 
 }
 
-void Aggressive::fortify() {
-
-	std::cout << "Fortify phase begins. Finding country with most armies to fortify." << endl;
-
-	int index = 0;
-	int largestArmy = 0;
+void Aggressive::fortify(Player *player) {
 
 
-	for (int i = 0; i < player->getCountriesOwned().size(); i++) {
-		if (player->getCountriesOwned()[i]->getArmyCount() > largestArmy) {
-			largestArmy = player->getCountriesOwned()[i]->getArmyCount();
-			index = i;
-		}
-	}
 
-	Country* target = player->getCountriesOwned()[index];
+	Fortify phase(player);
 
-	std::cout << "Strongest country found. " << target->getName() << endl;
-	std::cout << "Searching for adjacent source country." << endl;
+	phase.prompt();
 
-	for (auto i : target->getBorderCountries()) {
-		if (i->getOwner() == player->getId() && i->getArmyCount() > 1) {
-			cout << "Source country found. " << i->getName() << endl;
-			cout << "Moving forces from " << i->getName() << " to " << target->getName() << endl;
 
-			Fortify phase(player);
+	//std::cout << "Fortify phase begins. Finding country with most armies to fortify." << endl;
 
-			phase.fortifyCountry(i, target);
-		}
-	}
+	//int index = 0;
+	//int largestArmy = 0;
 
-	cout << "End of fortification phase." << endl;
+
+	//for (int i = 0; i < player->getCountriesOwned().size(); i++) {
+	//	if (player->getCountriesOwned()[i]->getArmyCount() > largestArmy) {
+	//		largestArmy = player->getCountriesOwned()[i]->getArmyCount();
+	//		index = i;
+	//	}
+	//}
+
+	//Country* target = player->getCountriesOwned()[index];
+
+	//std::cout << "Strongest country found. " << target->getName() << endl;
+	//std::cout << "Searching for adjacent source country." << endl;
+
+	//for (auto i : target->getBorderCountries()) {
+	//	if (i->getOwner() == player->getId() && i->getArmyCount() > 1) {
+	//		cout << "Source country found. " << i->getName() << endl;
+	//		cout << "Moving forces from " << i->getName() << " to " << target->getName() << endl;
+
+	//		Fortify phase(player);
+
+	//		phase.fortifyCountry(i, target);
+	//	}
+	//}
+
+	//cout << "End of fortification phase." << endl;
 
 }
 

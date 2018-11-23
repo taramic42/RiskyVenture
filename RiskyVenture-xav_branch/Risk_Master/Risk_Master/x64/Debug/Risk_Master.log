@@ -1,6 +1,8 @@
 ﻿  GameBoard.cpp
-c:\users\grego\desktop\xavswfortification\riskyventure-xav_branch\risk\board\gameboard.cpp(164): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\grego\desktop\a3_team5\part 1\riskyventure-xav_branch\risk\board\gameboard.cpp(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\grego\desktop\a3_team5\part 1\riskyventure-xav_branch\risk\board\gameboard.cpp(205): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Fortify.cpp
   Aggressive.cpp
-  main.cpp
+  PlayerStrategy.cpp
   Generating Code...
-  Risk_Master.vcxproj -> C:\Users\grego\Desktop\XavsWFortification\RiskyVenture-xav_branch\Risk_Master\x64\Debug\Risk_Master.exe
+  Risk_Master.vcxproj -> C:\Users\grego\Desktop\a3_team5\Part 1\RiskyVenture-xav_branch\Risk_Master\x64\Debug\Risk_Master.exe

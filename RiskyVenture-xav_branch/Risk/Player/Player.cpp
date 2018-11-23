@@ -83,20 +83,32 @@ void Player::diceImp(int num)
 
 void Player::reinforce(Deck* deck)
 {
+	cout << "                                        PLAYER " + to_string(id + 1) +
+		"\n__________________________________________________________________________________\n"
+		"+++++++++++++++++++++++++++++++++ REINFORCE PHASE ++++++++++++++++++++++++++++++++\n"
+		"__________________________________________________________________________________\n\n" << endl;
 	playerStrategy->reinforce(deck, this);
 }
 
 void Player::attack(vector<Player*> players)
 {
+	cout <<
+		"                                        PLAYER " + to_string(id + 1) +
+		"\n________________________________________________________________________________\n"
+		"++++++++++++++++++++++++++++++++++ ATTACK PHASE ++++++++++++++++++++++++++++++++\n"
+		"________________________________________________________________________________\n\n" << endl;
 	playerStrategy->attack(this, players);
 }
 
 void Player::fortify()
 {
-	Fortify phase(this);
-
-	phase.prompt();
-	//playerStrategy->fortify();
+	cout <<
+		"                                        PLAYER " + to_string(id + 1) +
+		"\n________________________________________________________________________________\n"
+		"+++++++++++++++++++++++++++++++ FORTIFY PHASE ++++++++++++++++++++++++++++++++++\n"
+		"________________________________________________________________________________\n\n" << endl;
+	playerStrategy->fortify(this);
+	
 }
 
 void Player::display() {
